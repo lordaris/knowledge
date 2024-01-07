@@ -1,21 +1,17 @@
-# Documentation
+# Knowledge (By Aris)
 
-## Project overview
-
-### Project name: Knowledge by Aris
-
-### Purpose
+## Purpose
 
 Provide a comprehensive and engaging learning experience on text-based content.
 Designed for self-learners who prefer reading over video lectures, offering courses
 across various subjects like programming, history, science and more.
 
-### Target Audience
+## Target Audience
 
 - Self-learners who prefer text-based learning.
 - Students and professionals looking for supplementary educational resources.
 
-### Key Features
+## Key Features
 
 1. **Course catalog**. Categorized by subjects and difficulty levels.
 2. **Interactive Lessons**: Text based lessons with interactive examples,
@@ -31,28 +27,28 @@ across various subjects like programming, history, science and more.
 7. **Mobile Responsive Design**: Ensuring a seamless learning experience
    across various devices.
 
-### Project Goals
+## Project Goals
 
 - To launch a beta version with 10 complete courses by [Date].
 - To reach 1,000 active users within six months of launch.
 - To consistently maintain a user satisfaction rate of over 90%.
 
-### Success Metrics
+## Success Metrics
 
 - User engagement rates, including average session duration
   and course completion rates.
 - User growth metrics, including sign-up rates and active user counts.
 - User feedback and satisfaction surveys following course completion.
 
-### Challenges and Considerations
+## Challenges and Considerations
 
 - Ensuring high-quality, engaging content for text-based learning.
 - Balancing technical robustness with ease of use for a diverse user base.
 - Implementing effective user authentication and data security measures with Clerk.
 
-## Technology Stack
+# Technology Stack
 
-### Frontend Technologies
+## Frontend Technologies
 
 - **Next.js**: Selected for its server-side rendering capabilities,
   which enhance SEO and improve performance, especially beneficial
@@ -63,7 +59,7 @@ across various subjects like programming, history, science and more.
   which enhance code quality and maintainability.
 - **shadcn/ui:** As a design system.
 
-### Backend Technologies
+## Backend Technologies
 
 - **Next.js API Routes**: Leveraged for building API endpoints
   within the Next.js framework. This simplifies development by
@@ -76,7 +72,7 @@ across various subjects like programming, history, science and more.
   designed to work in an asynchronous environment
   and simplify interactions with the database.
 
-### Authentication
+## Authentication
 
 - **Clerk**: Integrated for robust user authentication
   and management. Clerk provides a seamless and secure
@@ -88,7 +84,7 @@ across various subjects like programming, history, science and more.
   - User Data Management: Utilizing Clerk for storing and
     managing user profiles and authentication states.
 
-### Development Tools
+## Development Tools
 
 - **Git**: For version control, facilitating collaborative
   development and code versioning.
@@ -100,7 +96,7 @@ across various subjects like programming, history, science and more.
   providing seamless integration, automatic deployments,
   and support for serverless functions.
 
-### Additional Libraries and Frameworks
+## Additional Libraries and Frameworks
 
 - **Fetch API**: Employed for making HTTP requests from the frontend
   to the backend. The Fetch API is native to modern browsers, eliminating
@@ -108,14 +104,14 @@ across various subjects like programming, history, science and more.
 - **React Query**: Implemented for efficient server state management
   in the frontend, handling data fetching, caching, and state synchronization.
 
-## Authentication Flow
+# Authentication Flow
 
-### Overview
+## Overview
 
 This authentication flow combines Clerk's secure authentication
 processes with MongoDB Atlas for storing and managing user-specific data, such as course progress, preferences, and additional user details.
 
-### Sign Up Process
+## Sign Up Process
 
 1. **User Initiates Sign Up**: The user accesses the
    sign-up page with Clerk's sign-up component.
@@ -132,7 +128,7 @@ processes with MongoDB Atlas for storing and managing user-specific data, such a
 6. **Completion**: Post email verification, the user is directed
    to a welcome page or dashboard.
 
-### Sign In Process
+## Sign In Process
 
 1. **Credential Input and Authentication**: The user logs
    in using Clerk's sign-in component.
@@ -143,25 +139,25 @@ processes with MongoDB Atlas for storing and managing user-specific data, such a
      data from MongoDB Atlas using the Clerk user ID,
      populating the user's profile, progress, and personalized settings.
 
-### User Session and Data Management
+## User Session and Data Management
 
 - **Session Handling**: Managed by Clerk for secure authentication.
 - **Data Synchronization**: User interactions and progress are regularly updated in MongoDB Atlas, ensuring data consistency between Clerk and the database.
 - **Logout Process**: Logging out terminates the session in Clerk and updates the final state in the database.
 
-### Profile and Progress Management
+## Profile and Progress Management
 
 - **Profile Updates**: Users can edit their profiles, with changes reflected in both Clerk and MongoDB Atlas.
 - **Progress Tracking**: As users progress through courses, their milestones are recorded in MongoDB Atlas, providing a personalized learning experience.
 
-### Security and Data Integrity
+## Security and Data Integrity
 
 - **Data Encryption and Security**: Sensitive information is encrypted and securely handled by Clerk. MongoDB Atlas also provides robust security features for data storage.
 - **Consistency between Systems**: Regular synchronization ensures data consistency between Clerk and MongoDB Atlas.
 
-## Database Schema Overview
+# Database Schema Overview
 
-### Collections
+## Collections
 
 1. **Users**
 2. **Courses**
@@ -169,7 +165,7 @@ processes with MongoDB Atlas for storing and managing user-specific data, such a
 4. **Lessons**
 5. **Quizzes**
 
-### Users Collection
+## Users Collection
 
 - **\_id**: MongoDB's autogenerated unique identifier.
 - **clerkUserId**: Unique identifier from Clerk for user authentication linkage.
@@ -178,7 +174,7 @@ processes with MongoDB Atlas for storing and managing user-specific data, such a
 - **progress**: An array of objects detailing the user's progress in various courses, sections, and lessons.
 - **preferences**: An object to store user-specific settings and preferences.
 
-### Courses Collection
+## Courses Collection
 
 - **\_id**: Unique identifier for each course.
 - **title**: Name of the course.
@@ -189,7 +185,7 @@ processes with MongoDB Atlas for storing and managing user-specific data, such a
 - **isActive**: Boolean field to indicate whether the
   course is currently active and available.
 
-### Sections Collection
+## Sections Collection
 
 - **\_id**: Unique identifier for each section.
 - **title**: Title of the section.
@@ -197,33 +193,33 @@ processes with MongoDB Atlas for storing and managing user-specific data, such a
 - **courseId**: **`ObjectId`** reference to the corresponding **`Course`**.
 - **lessons**: An array of **`ObjectId`** references to the **`Lesson`** model, representing the lessons within the section.
 
-### Lessons Collection
+## Lessons Collection
 
 - **\_id**: Unique identifier for each lesson.
 - **title**: Title of the lesson.
 - **content**: The main textual content of the lesson.
 
-### Quizzes Collection TODO: Add later
+## Quizzes Collection TODO: Add later
 
 - **\_id**: Unique identifier for each quiz.
 - **lessonId**: **`ObjectId`** reference to the corresponding **`Lesson`**.
 - **questions**: An array of objects, each representing a quiz question with fields for the question text, options, and the correct answer.
 - **passingScore**: The minimum score required to pass the quiz.
 
-### **Notes on Schema**
+## **Notes on Schema**
 
 - **Flexibility and Scalability**: This schema is designed to be flexible and scalable, allowing for easy addition of new features or content types in the future.
 - **User Progress Tracking**: The **`progress`** field in the Users collection is pivotal for tracking each user's journey through the courses, enabling personalized learning experiences.
 - **Referential Integrity**: The use of **`ObjectId`** references ensures referential integrity between different entities, enabling efficient data retrieval and updates.
 
-### **API Documentation Overview**
+## **API Documentation Overview**
 
-### Base URL
+## Base URL
 
 External: **`https://knowledgebyaris.com/`**
 Internal: **`/api/`**
 
-### User Authentication (Managed by Clerk)
+## User Authentication (Managed by Clerk)
 
 - **Sign Up**
   - Endpoint: **`/sign-up`**
@@ -238,7 +234,7 @@ Internal: **`/api/`**
   - Request Body: **`{ email, password }`**
   - Response: **`200 OK`** with session details or **`401 Unauthorized`** on failure.
 
-### Courses
+## Courses
 
 - **List All Courses**
   - Endpoint: **`/courses`**
@@ -252,7 +248,7 @@ Internal: **`/api/`**
   - Path Parameter: **`courseId`**
   - Response: **`200 OK`** with course details or **`404 Not Found`** if not existing.
 
-### Sections
+## Sections
 
 - **Get Sections of a Course**
   - Endpoint: **`/courses/{courseId}/sections`**
@@ -261,7 +257,7 @@ Internal: **`/api/`**
   - Path Parameter: **`courseId`**
   - Response: **`200 OK`** with an array of sections or **`404 Not Found`** if course not found.
 
-### Lessons
+## Lessons
 
 - **Get Lessons of a Section**
   - Endpoint: **`/sections/{sectionId}/lessons`**
@@ -270,7 +266,7 @@ Internal: **`/api/`**
   - Path Parameter: **`sectionId`**
   - Response: **`200 OK`** with an array of lessons or **`404 Not Found`** if section not found.
 
-### User Progress
+## User Progress
 
 - **Update User Progress**
   - Endpoint: **`/users/{userId}/progress`**
@@ -280,11 +276,11 @@ Internal: **`/api/`**
   - Request Body: **`{ courseId, lessonId, progress }`**
   - Response: **`200 OK`** on successful update or **`404 Not Found`** if user/course not found.
 
-### Error Handling
+## Error Handling
 
 - Each endpoint should provide meaningful error messages and status codes for various failure scenarios, such as **`400 Bad Request`** for validation errors, **`401 Unauthorized`** for authentication failures, and **`500 Internal Server Error`** for unexpected issues.
 
-### **Notes on API Documentation**
+## **Notes on API Documentation**
 
 - **Versioning**: Consider versioning your API (e.g., **`/api/v1/`**) to manage changes and maintain backward compatibility.
 - **Security**: Ensure that all endpoints are secured as needed, particularly those that access or modify user data.
