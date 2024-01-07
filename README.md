@@ -1,5 +1,26 @@
 # Knowledge (By Aris)
 
+<!--toc:start-->
+
+- [Knowledge (By Aris)](#knowledge-by-aris)
+  - [Purpose](#purpose)
+  - [Target Audience](#target-audience)
+  - [Key Features](#key-features)
+  - [Technology Stack](#technology-stack)
+    - [Frontend Technologies](#frontend-technologies)
+    - [Backend Technologies](#backend-technologies)
+    - [Authentication](#authentication)
+    - [Development Tools](#development-tools)
+    - [Additional Libraries and Frameworks](#additional-libraries-and-frameworks)
+  - [Database Schema Overview](#database-schema-overview)
+    - [Collections](#collections)
+    - [Users Collection](#users-collection)
+    - [Courses Collection](#courses-collection)
+    - [Sections Collection](#sections-collection)
+    - [Lessons Collection](#lessons-collection)
+  - [**API Documentation Overview**](#api-documentation-overview) - [Base URL](#base-url) - [User Authentication (Managed by Clerk)](#user-authentication-managed-by-clerk) - [Courses](#courses) - [Sections](#sections) - [Lessons](#lessons) - [Error Handling](#error-handling) - [**Notes on API Documentation**](#notes-on-api-documentation)
+  <!--toc:end-->
+
 ## Purpose
 
 Provide a comprehensive and engaging learning experience on text-based content.
@@ -30,12 +51,12 @@ across various subjects like programming, history, science and more.
 
 - **Next.js**: Selected for its server-side rendering capabilities,
   which enhance SEO and improve performance, especially beneficial
-  for a content-rich application like Learnify.
+  for a content-rich application like Knowledge by Aris
 - **React**: Used for building a dynamic and interactive user interface,
   taking advantage of its component-based architecture.
 - **TypeScript**: Implemented for its strong typing features,
   which enhance code quality and maintainability.
-- **shadcn/ui:** As a design system.
+- **shadcn/ui:** As a design system for building the user interface.
 
 ### Backend Technologies
 
@@ -90,7 +111,6 @@ across various subjects like programming, history, science and more.
 2. **Courses**
 3. **Sections**
 4. **Lessons**
-5. **Quizzes**
 
 ### Users Collection
 
@@ -123,7 +143,7 @@ across various subjects like programming, history, science and more.
 - **title**: Title of the lesson.
 - **content**: The main textual content of the lesson.
 
-## **API Documentation Overview**
+## API Documentation Overview
 
 ### Base URL
 
@@ -133,11 +153,13 @@ Internal: **`/api/`**
 ### User Authentication (Managed by Clerk)
 
 - **Sign Up**
+
   - Endpoint: **`/sign-up`**
   - Method: **`POST`**
   - Description: Registers a new user.
   - Request Body: **`{ email, password }`**
   - Response: **`201 Created`** with user details or **`400 Bad Request`** on failure.
+
 - **Sign In**
   - Endpoint: **`/sign-in`**
   - Method: **`POST`**
@@ -147,42 +169,131 @@ Internal: **`/api/`**
 
 ### Courses
 
-- **List All Courses**
+- List All Courses
+
   - Endpoint: **`/courses`**
   - Method: **`GET`**
   - Description: Retrieves a list of all available courses.
   - Response: **`200 OK`** with an array of courses.
-- **Get Course Details**
+
+- Get Course Details
+
   - Endpoint: **`/courses/{courseId}`**
   - Method: **`GET`**
   - Description: Retrieves detailed information about a specific course.
   - Path Parameter: **`courseId`**
   - Response: **`200 OK`** with course details or **`404 Not Found`** if not existing.
 
+- Create a new course
+
+  - Endpoint: **`/courses`**
+  - Method: **`POST`**
+  - Description: Creates a new course.
+  - Request Body: **`{ title, description }`**
+  - Response: **`201 Created`** with course details or **`400 Bad Request`** on failure.
+
+- Update a course
+
+  - Endpoint: **`/courses/{courseId}`**
+  - Method: **`PUT`**
+  - Description: Updates an existing course.
+  - Path Parameter: **`courseId`**
+  - Request Body: **`{ title, description }`**
+  - Response: **`200 OK`** with course details or **`400 Bad Request`** on failure.
+
+- Delete a course
+
+  - Endpoint: **`/courses/{courseId}`**
+  - Method: **`DELETE`**
+  - Description: Deletes an existing course.
+  - Path Parameter: **`courseId`**
+  - Response: **`200 OK`** or **`400 Bad Request`** on failure.
+
 ### Sections
 
-- **Get Sections of a Course**
+- Add a section to a course
+
   - Endpoint: **`/courses/{courseId}/sections`**
-  - Method: **`GET`**
-  - Description: Retrieves sections of a specific course.
+  - Method: **`POST`**
+  - Description: Adds a new section to a specific course.
   - Path Parameter: **`courseId`**
-  - Response: **`200 OK`** with an array of sections or **`404 Not Found`** if course not found.
+  - Request Body: **`{ title, description }`**
+  - Response: **`201 Created`** with course details or **`400 Bad Request`** on failure.
+
+- Get a section from a course by id
+
+  - Endpoint: **`/courses/{courseId}/sections/{sectionId}`**
+  - Method: **`GET`**
+  - Description: Retrieves detailed information about a specific section.
+  - Path Parameter: **`sectionId`**
+  - Response: **`200 OK`** with section details or **`404 Not Found`** if not existing.
+
+- Update a section
+
+  - Endpoint: **`/courses/{courseId}/sections/{sectionId}`**
+  - Method: **`PUT`**
+  - Description: Updates an existing section.
+  - Path Parameter: **`sectionId`**
+  - Request Body: **`{ title, description }`**
+  - Response: **`200 OK`** with section details or **`400 Bad Request`** on failure.
+
+- Delete a section
+  - Endpoint: **`/courses/{courseId}/sections/{sectionId}`**
+  - Method: **`DELETE`**
+  - Description: Deletes an existing section.
+  - Path Parameter: **`sectionId`**
+  - Response: **`200 OK`** or **`400 Bad Request`** on failure.
 
 ### Lessons
 
-- **Get Lessons of a Section**
-  - Endpoint: **`/sections/{sectionId}/lessons`**
-  - Method: **`GET`**
-  - Description: Retrieves lessons in a specific section.
+- Add a lesson to a section
+
+  - Endpoint: **`/courses/sections/{sectionId}/lessons`**
+  - Method: **`POST`**
+  - Description: Adds a new lesson to a specific section.
   - Path Parameter: **`sectionId`**
-  - Response: **`200 OK`** with an array of lessons or **`404 Not Found`** if section not found.
+  - Request Body: **`{ title, content }`**
+  - Response: **`201 Created`** with section details or **`400 Bad Request`** on failure.
+
+- Get a lesson from a section by id
+
+  - Endpoint: **`/courses/sections/{sectionId}/lessons/{lessonId}`**
+  - Method: **`GET`**
+  - Description: Retrieves detailed information about a specific lesson.
+  - Path Parameter: **`lessonId`**
+  - Response: **`200 OK`** with lesson details or **`404 Not Found`** if not existing.
+
+- Update a lesson
+
+  - Endpoint: **`/courses/sections/{sectionId}/lessons/{lessonId}`**
+  - Method: **`PUT`**
+  - Description: Updates an existing lesson.
+  - Path Parameter: **`lessonId`**
+  - Request Body: **`{ title, content }`**
+  - Response: **`200 OK`** with lesson details or **`400 Bad Request`** on failure.
+
+- Delete a lesson
+
+  - Endpoint: **`/courses/sections/{sectionId}/lessons/{lessonId}`**
+  - Method: **`DELETE`**
+  - Description: Deletes an existing lesson.
+  - Path Parameter: **`lessonId`**
+  - Response: **`200 OK`** or **`400 Bad Request`** on failure.
 
 ### Error Handling
 
 - Each endpoint should provide meaningful error messages and status codes for various failure scenarios, such as **`400 Bad Request`** for validation errors, **`401 Unauthorized`** for authentication failures, and **`500 Internal Server Error`** for unexpected issues.
 
-### **Notes on API Documentation**
+### Notes on API Documentation
 
 - **Versioning**: Consider versioning your API (e.g., **`/api/v1/`**) to manage changes and maintain backward compatibility.
 - **Security**: Ensure that all endpoints are secured as needed, particularly those that access or modify user data.
 - **Consistency**: Maintain a consistent format and naming convention across all API endpoints for ease of use and understanding.
+
+### How to run the project locally (Development Mode)
+
+1. Clone the repository `git clone git@github.com:lordaris/knowledge.git`
+2. Install the dependencies by running `npm install` in the root directory.
+3. Create a `.env.local` file in the root directory and add the following environment variables:
+   `MONGODB_URI=<your-mongodb-uri>`
+4. Run the development server using `npm run dev`.

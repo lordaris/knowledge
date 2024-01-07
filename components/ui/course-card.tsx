@@ -12,7 +12,7 @@ import React from "react";
 export default function CourseCard({ course }) {
   return (
     <Link href={"/course/" + course.id}>
-      <Card className="hover:bg-foreground/5">
+      <Card className="min-h-32 border-2 hover:bg-foreground/5">
         <CardHeader>
           <CardTitle>{course.title}</CardTitle>
           <CardDescription>{course.description}</CardDescription>
