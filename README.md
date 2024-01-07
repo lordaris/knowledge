@@ -100,8 +100,6 @@ across various subjects like programming, history, science and more.
 - **Fetch API**: Employed for making HTTP requests from the frontend
   to the backend. The Fetch API is native to modern browsers, eliminating
   the need for additional libraries like Axios.
-- **React Query**: Implemented for efficient server state management
-  in the frontend, handling data fetching, caching, and state synchronization.
 
 ## Database Schema Overview
 
