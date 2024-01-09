@@ -6,12 +6,13 @@ import { NextRequest, NextResponse } from "next/server";
 
 import { type NextRequest } from "next/server";
 
+// Get a course with its sections and lessons
 export async function GET(
   request: Request,
-  { params }: { params: { slug: string } },
+  { params }: { params: { courseId: string } },
 ) {
   try {
-    const courseId = params.slug;
+    const courseId = params.courseId;
     console.log(courseId);
     const course = await Courses.findById(courseId)
       .populate({
@@ -36,30 +37,55 @@ export async function GET(
   }
 }
 
-// Create sections for a course
-export async function POST(
+// Update a course
+export async function PUT(
   request: NextRequest,
-  { params }: { params: { slug: string } },
+  { params }: { params: { courseId: string } },
 ) {
   try {
     const req = await request.json();
     const { title, description } = req;
-    const courseId = params.slug;
-    const newSection = new Sections({ title, description });
-    const savedSection = await newSection.save();
-    const course = await Courses.findById(courseId);
+    const courseId = params.courseId;
+    const course = await Courses.findByIdAndUpdate(
+      courseId,
+      { title, description },
+      { new: true },
+    );
     if (!course) {
       return NextResponse.json({
         message: "Course not found",
       });
     }
-    course.sections.push(savedSection._id);
-    await course.save();
     return NextResponse.json({
-      message: "Section created successfully",
-      data: savedSection,
+      message: "Course updated successfully",
+      data: course,
       success: true,
-      savedSection,
+    });
+  } catch (error) {
+    return NextResponse.json({
+      message: error.message,
+      success: false,
+    });
+  }
+}
+
+// Delete a course
+
+export async function DELETE(
+  request: NextRequest,
+  { params }: { params: { courseId: string } },
+) {
+  try {
+    const courseId = params.courseId;
+    const course = await Courses.findByIdAndDelete(courseId);
+    if (!course) {
+      return NextResponse.json({
+        message: "Course not found",
+      });
+    }
+    return NextResponse.json({
+      message: "Course deleted successfully",
+      success: true,
     });
   } catch (error) {
     return NextResponse.json({
