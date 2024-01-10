@@ -160,7 +160,7 @@ External: **`https://knowledgebyaris.com/`** Internal: **`/api/`**
 
 ### User Authentication (Managed by Clerk)
 
-- **Sign Up**
+- [ ] **Sign Up**
 
   - Endpoint: **`/sign-up`**
   - Method: **`POST`**
@@ -169,7 +169,7 @@ External: **`https://knowledgebyaris.com/`** Internal: **`/api/`**
   - Response: **`201 Created`** with user details or **`400 Bad Request`** on
     failure.
 
-- **Sign In**
+- [ ] **Sign In**
   - Endpoint: **`/sign-in`**
   - Method: **`POST`**
   - Description: Authenticates a user.
