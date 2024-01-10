@@ -272,7 +272,7 @@ External: **`https://knowledgebyaris.com/`** Internal: **`/api/`**
   - Response: **`201 Created`** with section details or **`400 Bad Request`** on
     failure.
 
-- Get a lesson from a section by id
+- [x] Get a lesson from a section by id
 
   - Endpoint: **`/courses/sections/{sectionId}/lessons/{lessonId}`**
   - Method: **`GET`**
@@ -281,7 +281,7 @@ External: **`https://knowledgebyaris.com/`** Internal: **`/api/`**
   - Response: **`200 OK`** with lesson details or **`404 Not Found`** if not
     existing.
 
-- Update a lesson
+- [x] Update a lesson
 
   - Endpoint: **`/courses/sections/{sectionId}/lessons/{lessonId}`**
   - Method: **`PUT`**
@@ -291,7 +291,7 @@ External: **`https://knowledgebyaris.com/`** Internal: **`/api/`**
   - Response: **`200 OK`** with lesson details or **`400 Bad Request`** on
     failure.
 
-- Delete a lesson
+- [x] Delete a lesson
 
   - Endpoint: **`/courses/sections/{sectionId}/lessons/{lessonId}`**
   - Method: **`DELETE`**
