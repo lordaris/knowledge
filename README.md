@@ -39,14 +39,15 @@ courses across various subjects like programming, history, science and more.
 
 ## Key Features
 
-1. **Course catalog**. Categorized by subjects2. **Interactive Lessons**: Text
-   based lessons with interactive examples, quizzes and exercises.
-2. **User Authentication**: Secure sign-up and sign-in using Clerk.
-3. **Progress Tracking**: Users can track their course progress and receive
+1. **Course catalog**. Categorized by subjects
+2. **Interactive Lessons**: Text based lessons with interactive examples,
+   quizzes and exercises.
+3. **User Authentication**: Secure sign-up and sign-in using Clerk.
+4. **Progress Tracking**: Users can track their course progress and receive
    personalized recommendations based on their learning history.
-4. **Accessibility Features**: High-contrast mode, text-to-speech options, and
+5. **Accessibility Features**: High-contrast mode, text-to-speech options, and
    adjustable text sizes for enhanced accessibility.
-5. **Mobile Responsive Design**: Ensuring a seamless learning experience across
+6. **Mobile Responsive Design**: Ensuring a seamless learning experience across
    various devices.
 
 ## Technology Stack
@@ -146,6 +147,13 @@ courses across various subjects like programming, history, science and more.
 
 ## API Documentation Overview
 
+### A note on API endpoints
+
+I don't really like the RESTful approach for this project, because it doesn't
+make much sense to me to have an unnecessary path variable for some of the
+endpoints, as the ids are different for each collection. I'll stick with it for
+now as it's the standard and it may be useful in the future.
+
 ### Base URL
 
 External: **`https://knowledgebyaris.com/`** Internal: **`/api/`**
@@ -235,7 +243,7 @@ External: **`https://knowledgebyaris.com/`** Internal: **`/api/`**
   - Response: **`200 OK`** with section details or **`404 Not Found`** if not
     existing.
 
-- Update a section
+- [x] Update a section
 
   - Endpoint: **`/courses/{courseId}/sections/{sectionId}`**
   - Method: **`PUT`**
@@ -245,7 +253,7 @@ External: **`https://knowledgebyaris.com/`** Internal: **`/api/`**
   - Response: **`200 OK`** with section details or **`400 Bad Request`** on
     failure.
 
-- Delete a section
+- [x] Delete a section
   - Endpoint: **`/courses/{courseId}/sections/{sectionId}`**
   - Method: **`DELETE`**
   - Description: Deletes an existing section.
@@ -254,8 +262,7 @@ External: **`https://knowledgebyaris.com/`** Internal: **`/api/`**
 
 ### Lessons
 
-- Add a lesson to a section
-- [X]
+- [x] Add a lesson to a section
 
   - Endpoint: **`/courses/sections/{sectionId}/lessons`**
   - Method: **`POST`**
