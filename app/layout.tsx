@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
 import ConnectToMongoDb from "@/utils/mongodb";
-import { ThemeProvider } from "@/components/theme-provider";
 import { SiteHeader } from "@/components/ui/site-header";
+import { Providers } from "@/app/providers/providers";
 
 const poppins = Poppins({ subsets: ["latin"], weight: ["400", "700"] });
 
@@ -22,15 +22,10 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={`${poppins.className} bg-background`}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="dark"
-          enableSystem
-          disableTransitionOnChange
-        >
+        <Providers>
           <SiteHeader />
           {children}
-        </ThemeProvider>
+        </Providers>
       </body>
     </html>
   );

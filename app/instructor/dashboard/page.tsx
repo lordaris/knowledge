@@ -1,31 +1,21 @@
 // app/instructor/dashboard/page.tsx
 "use client";
-import { NewCourse } from "@/components/course/create-course";
 import { CourseList } from "@/components/course/course-list";
-import { useState, useEffect } from "react";
+import { NewCourse } from "@/components/course/create-course";
+import { useCourse } from "@/app/providers/course-context-provider";
 
+// TODO: The list should show only the courses created by the current user
+// TODO: The list should be paginated
+// TODO: Create a CourseContext using ReactContext to share the course-list
+// state and keep the dashboard being server side rendered
+//
 export default function DashboardPage() {
-  const [courses, setCourses] = useState([]);
-  const loadCourses = async () => {
-    try {
-      const response = await fetch("/api/courses");
-      if (response.ok) {
-        const data = await response.json();
-        setCourses(data.data); // Use data.data to get the actual array of courses
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  useEffect(() => {
-    loadCourses();
-  }, []);
+  const { courses } = useCourse();
 
   return (
     <div className="">
-      <NewCourse onCourseCreated={loadCourses} />
-      <CourseList courses={courses} onCourseUpdated={loadCourses} />
+      <NewCourse />
+      <CourseList courses={courses} />
     </div>
   );
 }

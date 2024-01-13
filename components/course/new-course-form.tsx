@@ -15,6 +15,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { useState } from "react";
+import { useCourse } from "@/app/providers/course-context-provider";
 
 const formSchema = z.object({
   title: z.string().min(3, "Title should be at least 3 characters"),
@@ -23,7 +24,7 @@ const formSchema = z.object({
     .min(10, "Description should be at least 10 characters"),
 });
 
-export const NewCourseForm = ({ onCourseCreated, onClose }) => {
+export const NewCourseForm = ({ onClose }) => {
   const [isCourseCreated, setIsCourseCreated] = useState(false);
   const [submissionMessage, setSubmissionMessage] = useState("");
 
@@ -34,6 +35,8 @@ export const NewCourseForm = ({ onCourseCreated, onClose }) => {
       description: "",
     },
   });
+
+  const { loadCourses } = useCourse();
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
@@ -49,7 +52,7 @@ export const NewCourseForm = ({ onCourseCreated, onClose }) => {
           "Course created successfully! Please close this to continue",
         );
         setTimeout(() => {
-          onCourseCreated();
+          loadCourses();
           onClose();
         }, 2000);
       } else {
