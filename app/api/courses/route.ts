@@ -1,8 +1,7 @@
-// List all courses and post a course without lessons nor sections
-
 import Courses from "@/models/courses";
 import { NextRequest, NextResponse } from "next/server";
 
+// Create a course. It may include sections and lessons
 export async function POST(request: NextRequest) {
   try {
     const req = await request.json();
@@ -14,13 +13,15 @@ export async function POST(request: NextRequest) {
       message: "Course created successfully",
       data: savedCourse,
       success: true,
-      savedCourse,
     });
   } catch (error) {
-    return NextResponse.json({
-      message: error.message,
-      success: false,
-    });
+    return NextResponse.json(
+      {
+        message: error.message,
+        success: false,
+      },
+      { status: 500 },
+    );
   }
 }
 
