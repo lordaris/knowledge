@@ -28,10 +28,9 @@ const CourseItem = ({ course }) => {
   };
 
   return (
-    <div className="flex w-2/4 items-center justify-between gap-2 p-2">
-      <h1>{course.title}</h1>
+    <div className="flex  items-center justify-between gap-2 p-2">
+      <p className="leading-7 [&:not(:first-child)]:mt-6">{course.title}</p>
       <div className="flex gap-2">
-        <Button variant={"outline"}>Add Section</Button>
         <Button
           size={"icon"}
           variant={"destructive"}
