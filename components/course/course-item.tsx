@@ -27,8 +27,6 @@ const CourseItem = ({ course }) => {
     }
   };
 
-  console.log(course.sections);
-
   return (
     <div className="flex  items-center justify-between gap-2 p-2">
       <p className="leading-7 [&:not(:first-child)]:mt-6">{course.title}</p>
