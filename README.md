@@ -322,4 +322,6 @@ External: **`https://knowledgebyaris.com/`** Internal: **`/api/`**
 2. Install the dependencies by running `npm install` in the root directory.
 3. Create a `.env.local` file in the root directory and add the following
    environment variables: `MONGODB_URI=<your-mongodb-uri>`
+   NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY= `<your-clerk-publishable-key>`
+   CLERK_SECRET_KEY=`<your-clerk-secret-key>`
 4. Run the development server using `npm run dev`.

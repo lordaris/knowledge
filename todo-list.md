@@ -2,12 +2,21 @@
 
 ## High Priority
 
-- [ ] Add the Clerk API to the project.
+- [x] Add the Clerk API to the project.
+
   - [ ] Add the Clerk user to the database.
+
+    > [!NOTE] I'm exploring the idea of not storing the user in the database and
+    > instead creating a course enrollment schema to store the user id, course
+    > id and enrollment date, so each time a user enrolls in a course, a new
+    > enrollment is created, and I can have a page to show the courses the user
+    > is enrolled in. I am creating a new branch to explore this idea.
+
   - [ ] Add the Clerk user component to the navbar
         **(components/ui/site-header)**.
   - [ ] Modify the instructor/dashboard page to show the instructor's courses.
   - [ ] Secure the whole app with Clerk.
+
 - [ ] Modify the course model to include the instructor id.
   - [ ] Include the field in the documentation.
 - [ ] Modify the user model to include the courses array and the role.
