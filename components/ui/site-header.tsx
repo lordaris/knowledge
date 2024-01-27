@@ -1,16 +1,23 @@
 import { ModeToggle } from "./toggle";
 import { AppName } from "./app-name";
+import { UserButton } from "@clerk/nextjs";
+import Link from "next/link";
 
 export const SiteHeader = () => {
+  console.log(UserButton);
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur">
       <div className="container flex h-14  items-center justify-between">
-        <div className="flex-1 text-3xl">
-          <AppName />
+        <div className="text-3xl">
+          <Link href="/">
+            <AppName />
+          </Link>
         </div>
-        <div className="flex-1 text-center">middle</div>
-        <div className="flex-1 text-right">
+        <div className=" text-center">
           <ModeToggle />
+        </div>
+        <div className="flex">
+          <UserButton afterSignOutUrl="/" />
         </div>
       </div>
     </header>

@@ -4,15 +4,29 @@
 
 - [x] Add the Clerk API to the project.
 
-  - [ ] Add the Clerk user to the database.
+  - [x] Add the Clerk user to the database. (Cancelled by now)
 
     > [!NOTE] I'm exploring the idea of not storing the user in the database and
     > instead creating a course enrollment schema to store the user id, course
     > id and enrollment date, so each time a user enrolls in a course, a new
     > enrollment is created, and I can have a page to show the courses the user
-    > is enrolled in. I am creating a new branch to explore this idea.
+    > is enrolled in. I am creating a new branch to explore this idea. The same
+    > idea applies to the instructor, so there will be an instructor course
+    > schema with a list of the instructors and its courses, and with it only
+    > the instructors can modify its courses. I think that I'll use the role of
+    > the user directly from Clerk, so I don't have to store it in the database.
 
-  - [ ] Add the Clerk user component to the navbar
+    - [ ] Integrate the withAuth HOC with Clerk.
+
+      > [!NOTE] This will help me to get the user information from clerk and use
+      > it in the endpoints to manage the creation of courses and getting the
+      > courses by instructor id, and also to get the courses by student id.
+
+    - [x] Create the enrollment schema.
+    - [ ] Create a page to test the enrollment idea.
+    - [ ] Create a page to show the courses the user is enrolled in.
+
+  - [x] Add the Clerk user component to the navbar
         **(components/ui/site-header)**.
   - [ ] Modify the instructor/dashboard page to show the instructor's courses.
   - [ ] Secure the whole app with Clerk.
