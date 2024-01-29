@@ -12,10 +12,10 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
-import { useState } from "react";
-import { useCourse } from "@/app/providers/course-context-provider";
+import useCourseStore from "@/store/course-store";
 
 const formSchema = z.object({
   title: z.string().min(3, "Title should be at least 3 characters"),
@@ -27,6 +27,7 @@ const formSchema = z.object({
 export const NewCourseForm = ({ onClose }) => {
   const [isCourseCreated, setIsCourseCreated] = useState(false);
   const [submissionMessage, setSubmissionMessage] = useState("");
+  const { addCourse } = useCourseStore();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -36,28 +37,18 @@ export const NewCourseForm = ({ onClose }) => {
     },
   });
 
-  const { loadCourses } = useCourse();
-
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-      const res = await fetch("/api/courses", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(values),
-      });
+      // Call the addCourse method from useCourseStore
+      await useCourseStore.getState().addCourse(values);
 
-      if (res.ok) {
-        setIsCourseCreated(true);
-        setSubmissionMessage(
-          "Course created successfully! Please close this to continue",
-        );
-        setTimeout(() => {
-          loadCourses();
-          onClose();
-        }, 2000);
-      } else {
-        setSubmissionMessage("Failed to create course.");
-      }
+      setIsCourseCreated(true);
+      setSubmissionMessage(
+        "Course created successfully! Please close this to continue.",
+      );
+      setTimeout(() => {
+        onClose();
+      }, 1000);
     } catch (error) {
       console.error(error);
       setSubmissionMessage("An error occurred.");

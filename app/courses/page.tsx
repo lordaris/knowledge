@@ -1,3 +1,5 @@
+// app/courses/page.tsx
+
 import { courses } from "@/app/courses/mock-data";
 import CourseCard from "@/components/ui/course-card";
 

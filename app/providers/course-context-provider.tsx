@@ -17,7 +17,7 @@ export const CourseProvider = ({ children }) => {
 
   const loadCourses = useCallback(async () => {
     try {
-      const response = await fetch("/api/courses");
+      const response = await fetch(`/api/courses/`);
       if (response.ok) {
         const data = await response.json();
         setCourses(data.data);

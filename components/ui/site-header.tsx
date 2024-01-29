@@ -4,7 +4,6 @@ import { UserButton } from "@clerk/nextjs";
 import Link from "next/link";
 
 export const SiteHeader = () => {
-  console.log(UserButton);
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur">
       <div className="container flex h-14  items-center justify-between">

@@ -34,7 +34,6 @@ export async function PUT(
   try {
     const req = await request.json();
     const { title, content } = req;
-    console.log({ content });
     const lessonId = params.lessonId;
     const lesson = await Lessons.findByIdAndUpdate(
       lessonId,

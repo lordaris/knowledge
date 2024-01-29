@@ -16,12 +16,6 @@
     > the instructors can modify its courses. I think that I'll use the role of
     > the user directly from Clerk, so I don't have to store it in the database.
 
-    - [ ] Integrate the withAuth HOC with Clerk.
-
-      > [!NOTE] This will help me to get the user information from clerk and use
-      > it in the endpoints to manage the creation of courses and getting the
-      > courses by instructor id, and also to get the courses by student id.
-
     - [x] Create the enrollment schema.
     - [ ] Create a page to test the enrollment idea.
     - [ ] Create a page to show the courses the user is enrolled in.

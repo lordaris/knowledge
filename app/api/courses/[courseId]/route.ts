@@ -4,8 +4,6 @@ import Lessons from "@/models/lessons";
 
 import { NextRequest, NextResponse } from "next/server";
 
-import { type NextRequest } from "next/server";
-
 // Get a course with its sections and lessons
 export async function GET(
   request: Request,
@@ -13,7 +11,6 @@ export async function GET(
 ) {
   try {
     const courseId = params.courseId;
-    console.log(courseId);
     const course = await Courses.findById(courseId)
       .populate({
         path: "sections",
