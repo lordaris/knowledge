@@ -30,3 +30,10 @@ export async function GET(
     return NextResponse.json({ message: error.message, success: false });
   }
 }
+
+export async function POST(
+ request: Request,
+  { params }: { params: { instructorId: string } 
+) {
+  const {userId} = auth()
+}

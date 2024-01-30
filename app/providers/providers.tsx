@@ -1,5 +1,4 @@
 import { ThemeProvider } from "@/app/providers/theme-provider";
-import { CourseProvider } from "@/app/providers/course-context-provider";
 import { ClerkProvider } from "@clerk/nextjs";
 
 export function Providers({ children }) {
@@ -11,7 +10,7 @@ export function Providers({ children }) {
         enableSystem
         disableTransitionOnChange
       >
-        <CourseProvider>{children}</CourseProvider>
+        {children}
       </ThemeProvider>
     </ClerkProvider>
   );
