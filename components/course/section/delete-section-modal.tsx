@@ -9,13 +9,13 @@ import {
 import { Button } from "@/components/ui/button";
 
 const DeleteSectionConfirmationModal = ({
-  courseId,
+  sectionId,
   onDelete,
   open,
   setOpen,
 }) => {
   const handleDelete = async () => {
-    onDelete(courseId);
+    onDelete(sectionId);
     setOpen(false); // Close the modal after deletion
   };
 
@@ -23,9 +23,9 @@ const DeleteSectionConfirmationModal = ({
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Delete Course</DialogTitle>
+          <DialogTitle>Delete Section</DialogTitle>
           <DialogDescription>
-            Are you sure you want to delete this course?
+            Are you sure you want to delete this section?
           </DialogDescription>
         </DialogHeader>
         <div className="flex justify-end gap-4">

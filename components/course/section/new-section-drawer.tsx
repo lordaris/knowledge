@@ -9,14 +9,14 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
-import { NewCourseForm } from "@/components/course/new-course-form";
+import { NewSectionForm } from "@/components/course/section/new-section-form";
 import { Button } from "@/components/ui/button";
 
-export const NewCourseDrawer = ({ setOpen }) => {
+export const NewSectionDrawer = ({ courseId, setOpen }) => {
   return (
     <Drawer>
       <DrawerTrigger asChild>
-        <Button>Create new course</Button>
+        <Button>Create new section</Button>
       </DrawerTrigger>
       <DrawerContent>
         <DrawerHeader>
@@ -25,9 +25,10 @@ export const NewCourseDrawer = ({ setOpen }) => {
             Give your new course a title and description
           </DrawerDescription>
         </DrawerHeader>
-        <NewCourseForm
+        <NewSectionForm
           // OnClose does not work here
           // TODO: Fix this
+          courseId={courseId}
           onClose={() => setOpen(false)}
         />
         <DrawerFooter>

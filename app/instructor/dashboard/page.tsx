@@ -2,11 +2,15 @@
 import DeleteConfirmationModal from "@/components/course/delete-confirmation-modal";
 import { NewCourseDrawer } from "@/components/course/new-course-drawer";
 import { NewCourseModal } from "@/components/course/new-course-modal";
+import { NewSectionDrawer } from "@/components/course/section/new-section-drawer";
+import { NewSectionModal } from "@/components/course/section/new-section-modal";
+import DeleteSectionConfirmationModal from "@/components/course/section/delete-confirmation-modal";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@clerk/nextjs";
 import { TrashIcon } from "@radix-ui/react-icons";
 import { useCallback, useEffect, useState } from "react";
 import useCourseStore from "@/store/course-store";
+import useSectionStore from "@/store/section-store";
 
 import { useMediaQuery } from "@/hooks/use-media-query";
 
@@ -21,6 +25,7 @@ export default function NewCoursePage() {
       loadCourses(userId);
     }
   }, [userId, loadCourses]);
+
   const handleDelete = async (courseId) => {
     try {
       const response = await fetch(`/api/courses/${courseId}`, {
@@ -77,11 +82,33 @@ const NewCourse = () => {
 
 const CourseItem = ({ course, onDelete }) => {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const { loadSections, sectionsByCourse } = useSectionStore();
+
+  useEffect(() => {
+    loadSections(course._id);
+  }, [course._id, loadSections]);
+
+  const sections = sectionsByCourse[course._id] || [];
+  const sectionsData = sections.data;
+
+  const NewSection = ({ courseId }) => {
+    const [open, setOpen] = useState(false);
+    const desktop = "(min-width: 768px)";
+    const isDesktop = useMediaQuery(desktop);
+
+    const SectionCreationUI = isDesktop ? (
+      <NewSectionModal courseId={courseId} open={open} setOpen={setOpen} />
+    ) : (
+      <NewSectionDrawer courseId={courseId} setOpen={setOpen} />
+    );
+
+    return SectionCreationUI;
+  };
 
   return (
     <div className="flex items-center justify-between gap-2 p-2">
       <p className="leading-7 [&:not(:first-child)]:mt-6">{course.title}</p>
-      {course.sections}
+
       <div className="flex gap-2">
         <Button
           size={"icon"}
@@ -97,6 +124,12 @@ const CourseItem = ({ course, onDelete }) => {
           open={isDeleteModalOpen}
           setOpen={setIsDeleteModalOpen}
         />
+        <NewSection courseId={course._id} />
+      </div>
+      <div>
+        {sections.map((section) => (
+          <p key={section._id}>{section.title}</p>
+        ))}
       </div>
     </div>
   );

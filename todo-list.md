@@ -37,12 +37,12 @@
       clicked. It should have buttons to add, edit and delete the sections, each
       of them should open a modal or drawer (depending on the device) to perform
       the action.
-- [ ] Add a button to the course sections in the instructor/dashboard page to go
-      to an specific section page where lessons can be added. The page should
-      have a button to add a new lesson and a list of the lessons. Each lesson
-      should have a button to edit it and a button to delete it.
-  > [!NOTE] I'm exploring the idea of having the whole interactivity inside of
-  > the same page, so I won't continue with this point for now.
+- [ ] Modify the instructor dashboard to show the sections of the courses in a
+      proper way.
+  > [!NOTE] The idea is to show the sections in an accordion, and each section
+  > should have a button to add a new lesson, edit the section or delete it.
+  > Each lesson should have a button to edit or delete it. Only the lessons will
+  > be managed on a different page.
 
 ## Medium Priority
 

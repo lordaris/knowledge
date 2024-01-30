@@ -1,4 +1,5 @@
 "use client";
+
 import {
   Dialog,
   DialogContent,
@@ -7,23 +8,23 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { NewCourseForm } from "@/components/course/new-course-form";
+import { NewSectionForm } from "@/components/course/section/new-section-form";
 import { Button } from "@/components/ui/button";
 
-export const NewCourseModal = ({ open, setOpen }) => {
+export const NewSectionModal = ({ courseId, open, setOpen }) => {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button>Create new course</Button>
+        <Button>Create new section</Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>Create a new course</DialogTitle>
+          <DialogTitle>Create a new section</DialogTitle>
           <DialogDescription>
-            Give your new course a title and description
+            Give your new section a title and description
           </DialogDescription>
         </DialogHeader>
-        <NewCourseForm onClose={() => setOpen(false)} />
+        <NewSectionForm courseId={courseId} onClose={() => setOpen(false)} />
       </DialogContent>
     </Dialog>
   );

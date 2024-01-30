@@ -14,7 +14,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
-import useCourseStore from "@/store/course-store";
+import useSectionStore from "@/store/section-store";
 
 const formSchema = z.object({
   title: z.string().min(3, "Title should be at least 3 characters"),
@@ -23,10 +23,9 @@ const formSchema = z.object({
     .min(10, "Description should be at least 10 characters"),
 });
 
-export const NewCourseForm = ({ onClose }) => {
-  const [isCourseCreated, setIsCourseCreated] = useState(false);
+export const NewSectionForm = ({ courseId, onClose }) => {
+  const [isSectionCreated, setIsSectionCreated] = useState(false);
   const [submissionMessage, setSubmissionMessage] = useState("");
-  const { addCourse } = useCourseStore();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -39,11 +38,11 @@ export const NewCourseForm = ({ onClose }) => {
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       // Call the addCourse method from useCourseStore
-      await useCourseStore.getState().addCourse(values);
+      await useSectionStore.getState().addSection(courseId, values);
 
-      setIsCourseCreated(true);
+      setIsSectionCreated(true);
       setSubmissionMessage(
-        "Course created successfully! Please close this to continue.",
+        "Section created successfully! Please close this to continue.",
       );
       setTimeout(() => {
         onClose();
@@ -86,9 +85,9 @@ export const NewCourseForm = ({ onClose }) => {
             </FormItem>
           )}
         />
-        <Button type="submit">Create Course</Button>
+        <Button type="submit">Create Section</Button>
 
-        {isCourseCreated && <p>{submissionMessage}</p>}
+        {isSectionCreated && <p>{submissionMessage}</p>}
       </form>
     </Form>
   );
