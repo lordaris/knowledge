@@ -34,9 +34,9 @@
 - [Cancelled] Add an endpoint to see courses by student id
   **(student/:id/courses)**.
 
-  > [!IDEA]
-  > I think that I'll use the enrollment schema to show the courses the
-  > user is enrolled in, so I don't need to create a new endpoint for this.
+> [!IDEA]
+> I think that I'll use the enrollment schema to show the courses the
+> user is enrolled in, so I don't need to create a new endpoint for this.
 
 - [ ] Using an accordion from Shadcn, modify the **course-item
       (components/course/course-item)** component to show its sections when
@@ -44,10 +44,11 @@
       of them should open a modal or drawer (depending on the device) to perform
       the action.
 - [ ] Modify the instructor dashboard to show the courses in a proper way.
-  > [!IDEA]
-  > Show the courses in a single page and the sections and lessons in
-  > another page. The courses should have an accordion to show the description,
-  > and the sections should have an accordion to show the lessons.
+
+> [!IDEA]
+> Show the courses in a single page and the sections and lessons in another page.
+> The courses should have an accordion to show the description, and the sections
+> should have an accordion to show the lessons.
 
 ## Medium Priority
 
