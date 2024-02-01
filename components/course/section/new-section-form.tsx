@@ -26,6 +26,7 @@ const formSchema = z.object({
 export const NewSectionForm = ({ courseId, onClose }) => {
   const [isSectionCreated, setIsSectionCreated] = useState(false);
   const [submissionMessage, setSubmissionMessage] = useState("");
+  const { addSection, loadSections } = useSectionStore();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -44,6 +45,7 @@ export const NewSectionForm = ({ courseId, onClose }) => {
       setSubmissionMessage(
         "Section created successfully! Please close this to continue.",
       );
+      await loadSections(courseId);
       setTimeout(() => {
         onClose();
       }, 1000);

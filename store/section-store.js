@@ -30,12 +30,20 @@ const useSectionStore = create((set) => ({
       });
       if (!response.ok) throw new Error("Failed to add section");
       const newSection = await response.json();
-      set((state) => ({
-        sectionsByCourse: {
-          ...state.sectionsByCourse,
-          [courseId]: [...(state.sectionsByCourse[courseId] || []), newSection],
-        },
-      }));
+
+      set((state) => {
+        // Create a new array with the new section added
+        const updatedSections = [
+          ...(state.sectionsByCourse[courseId] || []),
+          newSection,
+        ];
+        return {
+          sectionsByCourse: {
+            ...state.sectionsByCourse,
+            [courseId]: updatedSections, // Update the specific course's sections
+          },
+        };
+      });
     } catch (error) {
       set({ error: error.message });
     }

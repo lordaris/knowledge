@@ -4,13 +4,14 @@ import { NewCourseDrawer } from "@/components/course/new-course-drawer";
 import { NewCourseModal } from "@/components/course/new-course-modal";
 import { NewSectionDrawer } from "@/components/course/section/new-section-drawer";
 import { NewSectionModal } from "@/components/course/section/new-section-modal";
-import DeleteSectionConfirmationModal from "@/components/course/section/delete-confirmation-modal";
+import DeleteSectionConfirmationModal from "@/components/course/section/delete-section-modal";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@clerk/nextjs";
 import { TrashIcon } from "@radix-ui/react-icons";
 import { useCallback, useEffect, useState } from "react";
 import useCourseStore from "@/store/course-store";
 import useSectionStore from "@/store/section-store";
+import { UpdateSectionForm } from "@/components/course/section/update-section-form";
 
 import { useMediaQuery } from "@/hooks/use-media-query";
 
@@ -25,19 +26,6 @@ export default function NewCoursePage() {
       loadCourses(userId);
     }
   }, [userId, loadCourses]);
-
-  const handleDelete = async (courseId) => {
-    try {
-      const response = await fetch(`/api/courses/${courseId}`, {
-        method: "DELETE",
-      });
-      if (response.ok) {
-        loadCourses(userId); // Reload the courses list after deletion
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
 
   // Fetch courses by instructor Id from the API and update the local state
   // using the loadCourses action
@@ -82,14 +70,24 @@ const NewCourse = () => {
 
 const CourseItem = ({ course, onDelete }) => {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [isSectionDeleteModalOpen, setIsSectionDeleteModalOpen] =
+    useState(false);
   const { loadSections, sectionsByCourse } = useSectionStore();
+  const { deleteSection } = useSectionStore();
+  const [selectedSectionId, setSelectedSectionId] = useState(null);
+
+  const handleDeleteSection = async (sectionId) => {
+    await deleteSection(course._id, sectionId);
+    await loadSections(course._id); // Reload sections for the course
+  };
+
+  const [editingSection, setEditingSection] = useState(null);
 
   useEffect(() => {
     loadSections(course._id);
   }, [course._id, loadSections]);
 
   const sections = sectionsByCourse[course._id] || [];
-  const sectionsData = sections.data;
 
   const NewSection = ({ courseId }) => {
     const [open, setOpen] = useState(false);
@@ -108,13 +106,11 @@ const CourseItem = ({ course, onDelete }) => {
   return (
     <div className="flex items-center justify-between gap-2 p-2">
       <p className="leading-7 [&:not(:first-child)]:mt-6">{course.title}</p>
-
       <div className="flex gap-2">
         <Button
           size={"icon"}
           variant={"destructive"}
           onClick={() => setIsDeleteModalOpen(true)}
-          className="text-foreground"
         >
           <TrashIcon />
         </Button>
@@ -128,9 +124,39 @@ const CourseItem = ({ course, onDelete }) => {
       </div>
       <div>
         {sections.map((section) => (
-          <p key={section._id}>{section.title}</p>
+          <div key={section._id}>
+            <p>{section.title}</p>
+
+            <Button onClick={() => setEditingSection(section)}>
+              Edit Section
+            </Button>
+            <Button
+              size={"icon"}
+              variant={"destructive"}
+              onClick={() => {
+                setSelectedSectionId(section._id);
+                setIsSectionDeleteModalOpen(true);
+              }}
+            >
+              <TrashIcon />
+            </Button>
+          </div>
         ))}
-      </div>
+        {isSectionDeleteModalOpen && (
+          <DeleteSectionConfirmationModal
+            sectionId={selectedSectionId}
+            onDelete={handleDeleteSection}
+            open={isSectionDeleteModalOpen}
+            setOpen={setIsSectionDeleteModalOpen}
+          />
+        )}
+        {editingSection && (
+          <UpdateSectionForm
+            section={editingSection}
+            onClose={() => setEditingSection(null)}
+          />
+        )}
+      </div>{" "}
     </div>
   );
 };
