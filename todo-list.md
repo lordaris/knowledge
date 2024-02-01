@@ -34,7 +34,7 @@
 - [Cancelled] Add an endpoint to see courses by student id
   **(student/:id/courses)**.
 
-> [!IDEA]
+> [!NOTE]
 > I think that I'll use the enrollment schema to show the courses the
 > user is enrolled in, so I don't need to create a new endpoint for this.
 
@@ -45,7 +45,7 @@
       the action.
 - [ ] Modify the instructor dashboard to show the courses in a proper way.
 
-> [!IDEA]
+> [!NOTE]
 > Show the courses in a single page and the sections and lessons in another page.
 > The courses should have an accordion to show the description, and the sections
 > should have an accordion to show the lessons.
