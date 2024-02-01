@@ -7,16 +7,16 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
+import useCourseStore from "@/store/course-store";
+import { useRouter } from "next/navigation";
 
-const DeleteSectionConfirmationModal = ({
-  courseId,
-  onDelete,
-  open,
-  setOpen,
-}) => {
+const DeleteCourseConfirmationModal = ({ courseId, open, setOpen }) => {
+  const { deleteCourse } = useCourseStore();
+  const router = useRouter();
+
   const handleDelete = async () => {
-    onDelete(courseId);
-    setOpen(false); // Close the modal after deletion
+    await deleteCourse(courseId);
+    router.push("/instructor/dashboard");
   };
 
   return (
@@ -41,4 +41,4 @@ const DeleteSectionConfirmationModal = ({
   );
 };
 
-export default DeleteSectionConfirmationModal;
+export default DeleteCourseConfirmationModal;

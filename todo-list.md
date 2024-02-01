@@ -2,53 +2,12 @@
 
 ## High Priority
 
-- [x] Add the Clerk API to the project.
+- [ ] Add a login page and a register page.
+- [ ] Add a page to show the user profile.
+- [ ] Add a page to edit the user profile.
+- [ ] Add a page to show the user courses.
 
-  - [x] Add the Clerk user to the database. (Cancelled by now)
-
-> [!NOTE]
-> I'm exploring the idea of not storing the user in the database and
-> instead creating a course enrollment schema to store the user id, courses id
-> and enrollment date, so each time a user enrolls in a course, a new enrollment
-> is created, and I can have a page to show the courses the user is enrolled in.
-> I am creating a new branch to explore this idea. The same idea applies to the
-> instructor, so there will be an instructor course schema with a list of the
-> instructors and its courses, and with it only the instructors can modify its
-> courses. I think that I'll use the role of the user directly from Clerk, so I
-> don't have to store it in the database.
-
-    - [x] Create the enrollment schema.
-    - [ ] Create a page to test the enrollment idea.
-    - [ ] Create a page to show the courses the user is enrolled in.
-
-- [x] Add the Clerk user component to the navbar
-      **(components/ui/site-header)**.
-- [x] Modify the instructor/dashboard page to show the instructor's courses.
 - [ ] Secure the whole app with Clerk.
-
-- [x] Modify the course model to include the instructor id (createdBy)
-  - [x] Include the field in the documentation.
-- [x] Add an endpoint to see courses by instructor id
-      **`courses/instructor/{instructorId}`**.
-  - [x] Include the endpoint information in the documentation.
-- [Cancelled] Add an endpoint to see courses by student id
-  **(student/:id/courses)**.
-
-> [!NOTE]
-> I think that I'll use the enrollment schema to show the courses the
-> user is enrolled in, so I don't need to create a new endpoint for this.
-
-- [ ] Using an accordion from Shadcn, modify the **course-item
-      (components/course/course-item)** component to show its sections when
-      clicked. It should have buttons to add, edit and delete the sections, each
-      of them should open a modal or drawer (depending on the device) to perform
-      the action.
-- [ ] Modify the instructor dashboard to show the courses in a proper way.
-
-> [!NOTE]
-> Show the courses in a single page and the sections and lessons in another page.
-> The courses should have an accordion to show the description, and the sections
-> should have an accordion to show the lessons.
 
 ## Medium Priority
 
@@ -59,3 +18,24 @@
 ## Low Priority
 
 - [x] Add a link to the Navbar logo to go to the home page.
+
+## Changes to include in the documentation
+
+Date (MM/dd/YYYY): 02/01/2024
+
+- Now the course model includes the instructor id, so the courses can be
+  filtered
+- Now the course model includes the active field, so the courses can be filtered
+- There are a new endpoint to see the courses by instructor id
+- There are a new schema for presenting the courses. The courses are now shown
+  in a page with a card, and have an edit button to go to the course edition
+  page.
+- The course edition page is now a form to edit the course. It have some side
+  effects to be handled, as the fact that going to the course edition page with
+  an invalid course id doesn't show any error message nor redirect to the
+  courses page. The course edition page should show an error message and
+  redirect to the courses page if the course id is invalid.
+- The user is not stored in the database, and the user id is used to create the
+  enrollment schema. The same applies to the instructor, so the instructor id is
+  used to create the instructor course schema. The user role and user Id are
+  used directly from Clerk, so it's not stored in the database.

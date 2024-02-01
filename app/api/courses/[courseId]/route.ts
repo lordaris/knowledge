@@ -2,6 +2,8 @@ import Courses from "@/models/courses";
 import Sections from "@/models/sections";
 import Lessons from "@/models/lessons";
 
+import { auth } from "@clerk/nextjs";
+
 import { NextRequest, NextResponse } from "next/server";
 
 // Get a course with its sections and lessons
@@ -40,6 +42,14 @@ export async function PUT(
   { params }: { params: { courseId: string } },
 ) {
   try {
+    const { userId } = auth();
+    if (!userId) {
+      return NextResponse.json({
+        message: "Unauthorized",
+        success: false,
+      });
+    }
+
     const req = await request.json();
     const { title, description } = req;
     const courseId = params.courseId;
@@ -51,6 +61,12 @@ export async function PUT(
     if (!course) {
       return NextResponse.json({
         message: "Course not found",
+      });
+    }
+    if (userId !== course.createdBy) {
+      return NextResponse.json({
+        message: "You are not authorized to update this course",
+        success: false,
       });
     }
     return NextResponse.json({
@@ -73,13 +89,28 @@ export async function DELETE(
   { params }: { params: { courseId: string } },
 ) {
   try {
+    const { userId } = auth();
+    if (!userId) {
+      return NextResponse.json({
+        message: "Unauthorized",
+        success: false,
+      });
+    }
     const courseId = params.courseId;
-    const course = await Courses.findByIdAndDelete(courseId);
-    if (!course) {
+    const course = await Courses.findById(courseId);
+    const courseDelete = await Courses.findByIdAndDelete(courseId);
+    if (!courseDelete) {
       return NextResponse.json({
         message: "Course not found",
       });
     }
+    if (userId !== course.createdBy) {
+      return NextResponse.json({
+        message: "You are not authorized to delete this course",
+        success: false,
+      });
+    }
+
     return NextResponse.json({
       message: "Course deleted successfully",
       success: true,
