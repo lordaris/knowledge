@@ -13,12 +13,25 @@
 
 ## High Priority
 
+- [ ] Move the delete button of the course edition page to the course list page,
+      next to the edit button.
+- [ ] Add a button to add a new section in the course edition page.
+- [ ] Add a button to delete a section in the course edition page.
+- [ ] Add a button to create a new lesson in the course edition page, it should
+      redirect to a new page to create the lesson.
+- [ ] Add a button to edit the lesson in the course edition page, it should
+      redirect to a new page to edit the lesson.
+- [ ] Add a button to delete the lesson in the course edition page.
 - [ ] Add a login page and a register page.
 - [ ] Add a page to show the user profile.
 - [ ] Add a page to edit the user profile.
 - [ ] Add a page to show the user courses.
 - [ ] Add the new endpoint to the documentation
       `**/api/courses/sections/[sectionId]/lessons**`
+- [ ] Include zustand and zod in the documentation.
+- [ ] Remove the check list items in the documentation as this is the TODO list
+      now.
+- [ ] Remove the accessibility features from the documentation by now.
 
 - [ ] Secure the whole app with Clerk.
 

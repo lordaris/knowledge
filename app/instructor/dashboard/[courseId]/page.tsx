@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button";
 import {
   Card,
   CardDescription,
+  CardContent,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -58,16 +59,20 @@ export default function CoursePage({
       <Button variant="destructive" onClick={() => setIsDeleteModalOpen(true)}>
         Delete Course
       </Button>
-      <section className="m-4 w-3/4 bg-popover-foreground/5">
-        <h2 className="p-4 text-2xl font-bold">Sections</h2>
-        {singleCourse.sections?.map((section) => (
-          <SectionItem
-            key={section._id}
-            section={section}
-            courseId={courseId}
-          />
-        ))}
-      </section>
+      <Card className="m-4 w-3/4 ">
+        <CardHeader>
+          <CardTitle>Sections</CardTitle>
+        </CardHeader>
+        <CardContent>
+          {singleCourse.sections?.map((section) => (
+            <SectionItem
+              key={section._id}
+              section={section}
+              courseId={courseId}
+            />
+          ))}
+        </CardContent>
+      </Card>
       {isDeleteModalOpen && (
         <DeleteCourseConfirmationModal
           courseId={courseId}
@@ -244,17 +249,23 @@ const SectionItem = ({ section, courseId }) => {
           </button>
         </div>
       ) : (
-        <section>
-          <h4 className="px-4 font-bold">Lessons</h4>
-          <Accordion type="single" collapsible className="w-full p-4">
-            {section.lessons.map((lesson) => (
-              <AccordionItem key={lesson._id} value={`${lesson._id}`}>
-                <AccordionTrigger>{lesson.title}</AccordionTrigger>
-                <AccordionContent>{lesson.content}</AccordionContent>
-              </AccordionItem>
-            ))}
-          </Accordion>
-        </section>
+        <CardContent>
+          <Card>
+            <CardHeader>
+              <CardTitle>Lessons</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <Accordion type="single" collapsible className="w-full p-4">
+                {section.lessons.map((lesson) => (
+                  <AccordionItem key={lesson._id} value={`${lesson._id}`}>
+                    <AccordionTrigger>{lesson.title}</AccordionTrigger>
+                    <AccordionContent>{lesson.content}</AccordionContent>
+                  </AccordionItem>
+                ))}
+              </Accordion>
+            </CardContent>
+          </Card>
+        </CardContent>
       )}
     </Card>
   );
