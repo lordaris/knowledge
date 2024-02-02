@@ -1,11 +1,24 @@
 # TODO List
 
+## Ideas to test before starting a new TODO item
+
+- To have a button to add a new lesson in every section in the course edition
+  page.
+- Clicking the button should redirect to a new page to add a new lesson. The
+  page should have a form to add the lesson title, the lesson content.
+- In the course edition page, there should be an edit button for the lessons, so
+  the user can edit the lesson title and the lesson content in a new page. Also
+  there should be a delete button for the lessons.
+- Add a counter for the sections in the course edition page.
+
 ## High Priority
 
 - [ ] Add a login page and a register page.
 - [ ] Add a page to show the user profile.
 - [ ] Add a page to edit the user profile.
 - [ ] Add a page to show the user courses.
+- [ ] Add the new endpoint to the documentation
+      `**/api/courses/sections/[sectionId]/lessons**`
 
 - [ ] Secure the whole app with Clerk.
 
@@ -39,3 +52,7 @@ Date (MM/dd/YYYY): 02/01/2024
   enrollment schema. The same applies to the instructor, so the instructor id is
   used to create the instructor course schema. The user role and user Id are
   used directly from Clerk, so it's not stored in the database.
+- Sections and Lessons are shown in the course edition page. Sections can be
+  edited directly from the course edition page, but the lessons are not editable
+  yet. There's a delete button for the sections, but it doesn't work yet.
+- There's a new endpoint to see the lessons by section id.

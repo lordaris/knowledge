@@ -57,3 +57,33 @@ export async function POST(
     });
   }
 }
+
+// Get lessons by sectionId
+export async function GET({ params }: { params: { sectionId: string } }) {
+  try {
+    const sectionId = params.sectionId;
+    // Validate sectionId
+    if (!mongoose.Types.ObjectId.isValid(sectionId)) {
+      return NextResponse.json({
+        message: "Invalid Section ID",
+        success: false,
+      });
+    }
+    const section = await Sections.findById(sectionId).populate("lessons");
+    if (!section) {
+      return NextResponse.json({
+        message: "Section not found",
+        success: false,
+      });
+    }
+    return NextResponse.json({
+      data: section.lessons,
+      success: true,
+    });
+  } catch (error) {
+    return NextResponse.json({
+      message: error.message,
+      success: false,
+    });
+  }
+}

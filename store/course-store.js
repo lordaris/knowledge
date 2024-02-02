@@ -3,6 +3,7 @@ import { create } from "zustand";
 const useCourseStore = create((set) => ({
   courses: [],
   singleCourse: {},
+  lessons: [],
   setCourses: (courses) => set({ courses }),
   loadCourses: async (userId) => {
     try {
@@ -26,6 +27,26 @@ const useCourseStore = create((set) => ({
       console.log(error);
     }
   },
+
+  loadLessons: async (courseId, sectionId) => {
+    try {
+      const response = await fetch(
+        `/api/courses/sections/${sectionId}/lessons`,
+      );
+      if (!response.ok) throw new Error("Failed to fetch lessons");
+      const data = await response.json();
+      set((state) => ({
+        singleCourse: {
+          ...state.singleCourse,
+          sections: state.singleCourse.sections.map((section) =>
+            section._id === sectionId ? { ...section, lessons: data } : section,
+          ),
+        },
+      }));
+    } catch (error) {
+      console.error(error);
+    }
+  },
   addCourse: async (newCourse) => {
     try {
       const response = await fetch("/api/courses", {
@@ -38,6 +59,59 @@ const useCourseStore = create((set) => ({
         set((state) => ({ courses: [...state.courses, data.data] }));
       } else {
         throw new Error("Failed to create course");
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  },
+
+  addSection: async (courseId, newSection) => {
+    try {
+      const response = await fetch(`/api/courses/${courseId}/sections`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(newSection),
+      });
+      if (response.ok) {
+        const data = await response.json();
+        set((state) => ({
+          singleCourse: {
+            ...state.singleCourse,
+            sections: [...state.singleCourse.sections, data.data],
+          },
+        }));
+      } else {
+        throw new Error("Failed to create section");
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  },
+
+  addLesson: async (courseId, sectionId, newLesson) => {
+    try {
+      const response = await fetch(
+        `/api/courses/sections/${sectionId}/lessons`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(newLesson),
+        },
+      );
+      if (response.ok) {
+        const data = await response.json();
+        set((state) => ({
+          singleCourse: {
+            ...state.singleCourse,
+            sections: state.singleCourse.sections.map((section) =>
+              section._id === sectionId
+                ? { ...section, lessons: [...section.lessons, data.data] }
+                : section,
+            ),
+          },
+        }));
+      } else {
+        throw new Error("Failed to create lesson");
       }
     } catch (error) {
       console.error(error);
@@ -75,6 +149,36 @@ const useCourseStore = create((set) => ({
         }));
       } else {
         throw new Error("Failed to update course");
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  },
+
+  updateSection: async (courseId, sectionId, updatedSection) => {
+    try {
+      const response = await fetch(
+        `/api/courses/${courseId}/sections/${sectionId}`,
+        {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(updatedSection),
+        },
+      );
+      if (response.ok) {
+        const data = await response.json();
+        set((state) => ({
+          singleCourse: {
+            ...state.singleCourse,
+            sections: state.singleCourse.sections.map((section) =>
+              section._id === sectionId
+                ? { ...section, ...data.data, lessons: section.lessons } // Ensure lessons are preserved or merged from response
+                : section,
+            ),
+          },
+        }));
+      } else {
+        throw new Error("Failed to update section");
       }
     } catch (error) {
       console.error(error);

@@ -39,18 +39,30 @@ export async function PUT(
     const { title, description } = req;
     const sectionId = params.sectionId;
 
-    // Find section by section id and update it
-    const section = await Sections.findByIdAndUpdate(
+    // Update the section
+    await Sections.findByIdAndUpdate(
       sectionId,
       { title, description },
       { new: true },
     );
-    if (!section) {
+
+    // After updating, find the section again to populate its lessons
+    const updatedSectionWithLessons = await Sections.findById(sectionId)
+      .populate({
+        path: "lessons",
+        model: Lessons,
+      })
+      .lean();
+
+    if (!updatedSectionWithLessons) {
       return NextResponse.json({
         message: "Section not found",
       });
     }
-    return NextResponse.json({ data: section, success: true });
+    return NextResponse.json({
+      data: updatedSectionWithLessons,
+      success: true,
+    });
   } catch (error) {
     return NextResponse.json({ message: error.message, success: false });
   }
