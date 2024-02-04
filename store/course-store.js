@@ -27,6 +27,19 @@ const useCourseStore = create((set) => ({
       console.log(error);
     }
   },
+  loadSections: async (courseId) => {
+    try {
+      const response = await fetch(`/api/courses/${courseId}`);
+      if (!response.ok) throw new Error("Failed to load sections");
+      const result = await response.json();
+      const sections = result.data.sections || []; // Extract sections from response
+      set((state) => ({
+        singleCourse: { ...state.singleCourse, sections },
+      }));
+    } catch (error) {
+      console.error(error);
+    }
+  },
 
   loadLessons: async (courseId, sectionId) => {
     try {

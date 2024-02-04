@@ -10,16 +10,20 @@ import {
 import { Button } from "@/components/ui/button";
 import {
   Card,
-  CardDescription,
   CardContent,
+  CardDescription,
+  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import useCourseStore from "@/store/course-store";
-import { Pencil2Icon, TrashIcon } from "@radix-ui/react-icons";
-import { useEffect, useState } from "react";
 import { Textarea } from "@/components/ui/textarea";
+import useCourseStore from "@/store/course-store";
+import { Pencil2Icon, TrashIcon, PlusIcon } from "@radix-ui/react-icons";
+import { useEffect, useState } from "react";
+import { NewSectionModal } from "@/components/course/section/new-section-modal";
+import { NewSectionDrawer } from "@/components/course/section/new-section-drawer";
+import { useMediaQuery } from "@/hooks/use-media-query";
 
 import { Label } from "@/components/ui/label";
 
@@ -61,17 +65,24 @@ export default function CoursePage({
       </Button>
       <Card className="m-4 w-3/4 ">
         <CardHeader>
-          <CardTitle>Sections</CardTitle>
+          <CardTitle className="flex items-center justify-between">
+            Sections
+          </CardTitle>
         </CardHeader>
         <CardContent>
-          {singleCourse.sections?.map((section) => (
+          {singleCourse.sections?.map((section, index) => (
             <SectionItem
               key={section._id}
               section={section}
               courseId={courseId}
+              sectionNumber={index + 1}
             />
           ))}
         </CardContent>
+        {/* TODO: Add a proper form, modal and drawer for adding a new section. */}
+        <CardFooter>
+          <NewSection courseId={courseId} />
+        </CardFooter>{" "}
       </Card>
       {isDeleteModalOpen && (
         <DeleteCourseConfirmationModal
@@ -85,95 +96,7 @@ export default function CoursePage({
   );
 }
 
-/*
-// TODO: modify the component to create a propper form and its modal and drawer.
-const AddSectionTemporaryComponent = ({ courseId }) => {
-  const [sectionTitle, setSectionTitle] = useState("");
-  const [sectionDescription, setSectionDescription] = useState("");
-  const { addSection } = useCourseStore();
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      await addSection(courseId, {
-        title: sectionTitle,
-        description: sectionDescription,
-      });
-    } catch (error) {
-      console.error("Error adding section:", error);
-    }
-  };
-
-  return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label htmlFor="title">Title:</label>
-        <input
-          id="title"
-          type="text"
-          value={sectionTitle}
-          onChange={(e) => setSectionTitle(e.target.value)}
-        />
-      </div>
-      <div>
-        <label htmlFor="description">Description:</label>
-        <textarea
-          id="description"
-          value={sectionDescription}
-          onChange={(e) => setSectionDescription(e.target.value)}
-        />
-      </div>
-      <button type="submit">Add Section</button>
-    </form>
-  );
-};
-
-// TODO: Modify this component to create a proper form and its modal and drawer.
-const AddLessonTemporaryComponent = ({ courseId, sectionId }) => {
-  const [lessonTitle, setLessonTitle] = useState("");
-  const [lessonContent, setLessonContent] = useState("");
-  const { addLesson } = useCourseStore();
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      await addLesson(courseId, sectionId, {
-        title: lessonTitle,
-        content: lessonContent,
-      });
-      setLessonTitle("");
-      setLessonContent("");
-      // Add additional logic if needed, like a confirmation message
-    } catch (error) {
-      console.error("Error adding lesson:", error);
-    }
-  };
-
-  return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label htmlFor="lesson-title">Title:</label>
-        <input
-          id="lesson-title"
-          type="text"
-          value={lessonTitle}
-          onChange={(e) => setLessonTitle(e.target.value)}
-        />
-      </div>
-      <div>
-        <label htmlFor="lesson-content">Content:</label>
-        <textarea
-          id="lesson-content"
-          value={lessonContent}
-          onChange={(e) => setLessonContent(e.target.value)}
-        />
-      </div>
-      <button type="submit">Add Lesson</button>
-    </form>
-  );
-}; */
-
-const SectionItem = ({ section, courseId }) => {
+const SectionItem = ({ section, courseId, sectionNumber }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [title, setTitle] = useState(section.title);
   const [description, setDescription] = useState(section.description);
@@ -220,7 +143,7 @@ const SectionItem = ({ section, courseId }) => {
         ) : (
           <>
             <CardHeader>
-              <CardTitle>{title}</CardTitle>
+              <CardTitle>{"Section " + sectionNumber + ": " + title}</CardTitle>
               <CardDescription>{description}</CardDescription>
             </CardHeader>
             <div className="absolute right-4 top-4 flex opacity-0 transition-opacity group-hover:opacity-100">
@@ -252,14 +175,21 @@ const SectionItem = ({ section, courseId }) => {
         <CardContent>
           <Card>
             <CardHeader>
-              <CardTitle>Lessons</CardTitle>
+              <div className="flex items-center justify-between">
+                <CardTitle>Lessons</CardTitle>
+                <PlusIcon className="h-6 w-6 cursor-pointer" />
+              </div>
             </CardHeader>
             <CardContent>
               <Accordion type="single" collapsible className="w-full p-4">
-                {section.lessons.map((lesson) => (
+                {section.lessons.map((lesson, index) => (
                   <AccordionItem key={lesson._id} value={`${lesson._id}`}>
-                    <AccordionTrigger>{lesson.title}</AccordionTrigger>
-                    <AccordionContent>{lesson.content}</AccordionContent>
+                    <AccordionTrigger>
+                      {"Lesson " + (index + 1) + ": " + lesson.title}
+                    </AccordionTrigger>
+                    <AccordionContent className="flex items-center justify-between">
+                      {lesson.content}{" "}
+                    </AccordionContent>
                   </AccordionItem>
                 ))}
               </Accordion>
@@ -269,4 +199,18 @@ const SectionItem = ({ section, courseId }) => {
       )}
     </Card>
   );
+};
+
+const NewSection = ({ courseId }) => {
+  const [open, setOpen] = useState(false);
+  const desktop = "(min-width: 768px)";
+  const isDesktop = useMediaQuery(desktop);
+
+  const CourseCreationUI = isDesktop ? (
+    <NewSectionModal courseId={courseId} open={open} setOpen={setOpen} />
+  ) : (
+    <NewSectionDrawer courseId={courseId} setOpen={setOpen} />
+  );
+
+  return CourseCreationUI;
 };

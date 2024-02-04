@@ -69,3 +69,8 @@ Date (MM/dd/YYYY): 02/01/2024
   edited directly from the course edition page, but the lessons are not editable
   yet. There's a delete button for the sections, but it doesn't work yet.
 - There's a new endpoint to see the lessons by section id.
+
+Date (MM/dd/YYYY): 02/04/2024
+
+- Add Create new section button in the course edition page. It launches a modal
+  or drawer to create a new section.

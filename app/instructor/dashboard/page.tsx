@@ -32,7 +32,7 @@ export default function NewCoursePage() {
       <div className="mb-4 ">
         <NewCourse />
       </div>
-      <div className="w-3/4">
+      <div className="w-2/4">
         {courses.map((course) => (
           <div key={course._id} className="group relative m-4">
             <Card className="flex items-center  ">

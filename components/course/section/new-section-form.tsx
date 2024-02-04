@@ -14,7 +14,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
-import useSectionStore from "@/store/section-store";
+import useCourseStore from "@/store/course-store";
 
 const formSchema = z.object({
   title: z.string().min(3, "Title should be at least 3 characters"),
@@ -26,8 +26,7 @@ const formSchema = z.object({
 export const NewSectionForm = ({ courseId, onClose }) => {
   const [isSectionCreated, setIsSectionCreated] = useState(false);
   const [submissionMessage, setSubmissionMessage] = useState("");
-  const { addSection, loadSections } = useSectionStore();
-
+  const { addSection, loadSections } = useCourseStore();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -39,7 +38,7 @@ export const NewSectionForm = ({ courseId, onClose }) => {
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       // Call the addCourse method from useCourseStore
-      await useSectionStore.getState().addSection(courseId, values);
+      await addSection(courseId, values);
 
       setIsSectionCreated(true);
       setSubmissionMessage(
