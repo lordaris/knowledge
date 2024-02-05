@@ -70,7 +70,16 @@ Date (MM/dd/YYYY): 02/01/2024
   yet. There's a delete button for the sections, but it doesn't work yet.
 - There's a new endpoint to see the lessons by section id.
 
-Date (MM/dd/YYYY): 02/04/2024
+Date 02/04/2024
 
 - Add Create new section button in the course edition page. It launches a modal
   or drawer to create a new section.
+
+Date 02/05/2024
+
+- Add "Create new lesson" button in the course edition page. It redirects to a
+  new page to create the lesson. The page have a form to add the lesson title,
+  the lesson content, and a button to create the lesson and go back to the
+  course edition page.
+- Add "Delete section" button in the course edition page. It should delete the
+  section and all the lessons in it.

@@ -41,7 +41,7 @@ const useCourseStore = create((set) => ({
     }
   },
 
-  loadLessons: async (courseId, sectionId) => {
+  loadLessons: async (sectionId) => {
     try {
       const response = await fetch(
         `/api/courses/sections/${sectionId}/lessons`,
@@ -60,6 +60,7 @@ const useCourseStore = create((set) => ({
       console.error(error);
     }
   },
+
   addCourse: async (newCourse) => {
     try {
       const response = await fetch("/api/courses", {
@@ -101,7 +102,7 @@ const useCourseStore = create((set) => ({
     }
   },
 
-  addLesson: async (courseId, sectionId, newLesson) => {
+  addLesson: async (sectionId, newLesson) => {
     try {
       const response = await fetch(
         `/api/courses/sections/${sectionId}/lessons`,
@@ -193,6 +194,28 @@ const useCourseStore = create((set) => ({
       } else {
         throw new Error("Failed to update section");
       }
+    } catch (error) {
+      console.error(error);
+    }
+  },
+
+  deleteSection: async (courseId, sectionId) => {
+    try {
+      const response = await fetch(
+        `/api/courses/${courseId}/sections/${sectionId}`,
+        {
+          method: "DELETE",
+        },
+      );
+      if (!response.ok) throw new Error("Failed to delete section");
+      set((state) => ({
+        singleCourse: {
+          ...state.singleCourse,
+          sections: state.singleCourse.sections.filter(
+            (section) => section._id !== sectionId,
+          ),
+        },
+      }));
     } catch (error) {
       console.error(error);
     }
