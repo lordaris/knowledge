@@ -83,3 +83,8 @@ Date 02/05/2024
   course edition page.
 - Add "Delete section" button in the course edition page. It should delete the
   section and all the lessons in it.
+
+Date 02/06/2024
+
+- Add MDXeditor to the lesson edition page.
+- [ ] Make the app to apply the semantic formatting to the lessons.

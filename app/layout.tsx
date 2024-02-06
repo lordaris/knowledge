@@ -4,7 +4,7 @@ import "./globals.css";
 import ConnectToMongoDb from "@/utils/mongodb";
 import { SiteHeader } from "@/components/ui/site-header";
 import { Providers } from "@/app/providers/providers";
-
+import "@mdxeditor/editor/style.css";
 const poppins = Poppins({ subsets: ["latin"], weight: ["400", "700"] });
 
 export const metadata: Metadata = {
