@@ -317,7 +317,7 @@ External: **`https://knowledgebyaris.com/`** Internal: **`/api/`**
 - **Consistency**: Maintain a consistent format and naming convention across all
   API endpoints for ease of use and understanding.
 
-### How to run the project locally (Development Mode)
+## How to run the project locally (Development Mode)
 
 1. Clone the repository `git clone git@github.com:lordaris/knowledge.git`
 2. Install the dependencies by running `npm install` in the root directory.
