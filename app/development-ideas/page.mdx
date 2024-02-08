@@ -9,9 +9,13 @@ proposed for the list of endpoints and the application's URL structure.
 - **Main page** `/` 
   - It should show a welcome hero, a button to go to explore courses, and a button to go to the about page. 
 - **Courses** `/courses`
-  - It should show a list of available courses. 
+  - List of available courses. [^1]
+[^1]: Present a comprehensive list of available courses, incorporating filtering options
+by categories, a search bar for direct queries, and pagination to manage the display of numerous courses effectively.
 - **Course detail**  `/courses/:id` 
-  - It should show the course details. 
+  - Course details. [^2]
+  [^2]: Offer detailed information about the course, 
+  including its syllabus, instructor details, user reviews, and enrollment options.
 
 ### Instructors
 - **Instructor dashboard** `/instructor`
@@ -32,34 +36,32 @@ proposed for the list of endpoints and the application's URL structure.
 
 ## New Endpoints 
 ### Courses
-- **Get one course by id, with its sections and lessons:** 
-  - `GET /api/courses/:courseId`
-- **Get all courses:** 
-  - `GET /api/courses`
-- **Get all available courses:** 
-  - `GET /api/courses?available=true`
-- **Create a course**: 
-  - `POST /api/courses`
-- **Update a course:**
-  - `PUT /api/courses/:courseId`
-- **Delete a course:**
-  - `DELETE /api/courses/:courseId`
-- **Create a section for a course:** 
-  - `POST /api/courses/:courseId/sections`
-- **Get a section with its lessons**
-  - `GET /api/sections/:sectionId`
-- **Update a section:** 
-  - `PUT /api/sections/:sectionId`
-- **Delete a section:** 
-  - `DELETE /api/sections/:sectionId`
-- **Create a lesson for a section:** 
-  - `POST /api/sections/:sectionId/lessons`
-- **Get a lesson from Id** 
-  - `GET /api/lessons/:lessonId`
-- **Update a lesson:** 
-  - `PUT /api/lessons/:lessonId`
-- **Delete a lesson:** 
-  - `DELETE /api/lessons/:lessonId`
+
+
+- `/api/courses/:courseId`
+  - `GET`: Get a course by course Id
+  - `PUT`: Update a course by course Id
+  - `DELETE`: Delete a course.
+- `/api/courses`
+  - `GET`: Get a list of courses.
+  - `POST`: Create a new course.
+
+### Sections
+- `/api/courses/:courseId/sections`
+  - `POST`: Create a section for a course.
+- `/api/sections/:sectionId`
+  - `GET`: Get a section with its lessons
+  - `PUT`: Update a section
+  - `DELETE`: Delete a section
+
+### Lessons
+- `/api/sections/:sectionId/lessons`
+  - `POST`: Create a lesson for a section.
+- `/api/lessons/:lessonId`
+  - `GET`: Get a lesson from Id
+  - `PUT`: Update a lesson
+  - `DELETE`: Delete a lesson
+
 
 ## Models 
 For data models, the following structure is proposed for the Course model:
@@ -69,4 +71,4 @@ For data models, the following structure is proposed for the Course model:
 - Availability: A boolean to indicate if the course is currently available.
 - Categories: An array of strings categorizing the course.
 
-
+## Footnotes
