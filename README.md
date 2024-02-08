@@ -1,7 +1,6 @@
 # Knowledge (By Aris)
 
 <!--toc:start-->
-
 - [Knowledge (By Aris)](#knowledge-by-aris)
   - [Purpose](#purpose)
   - [Target Audience](#target-audience)
@@ -16,14 +15,16 @@
     - [Courses Collection](#courses-collection)
     - [Sections Collection](#sections-collection)
     - [Lessons Collection](#lessons-collection)
-  - [API Documentation Overview](#api-documentation-overview) -
-  [A note on API endpoints](#a-note-on-api-endpoints) - [Base URL](#base-url) -
-  [User Authentication (Managed by Clerk)](#user-authentication-managed-by-clerk) -
-  [Courses](#courses) - [Sections](#sections) - [Lessons](#lessons) -
-  [Error Handling](#error-handling) -
-  [Notes on API Documentation](#notes-on-api-documentation) -
-  [How to run the project locally (Development Mode)](#how-to-run-the-project-locally-development-mode)
-  <!--toc:end-->
+  - [API Documentation Overview](#api-documentation-overview)
+    - [Base URL](#base-url)
+    - [User Authentication (Managed by Clerk)](#user-authentication-managed-by-clerk)
+    - [Courses](#courses)
+    - [Sections](#sections)
+    - [Lessons](#lessons)
+    - [Error Handling](#error-handling)
+    - [Notes on API Documentation](#notes-on-api-documentation)
+  - [How to run the project locally (Development Mode)](#how-to-run-the-project-locally-development-mode)
+<!--toc:end-->
 
 ## Purpose
 
