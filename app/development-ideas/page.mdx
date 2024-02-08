@@ -45,6 +45,8 @@ by categories, a search bar for direct queries, and pagination to manage the dis
 - `/api/courses`
   - `GET`: Get a list of courses.
   - `POST`: Create a new course.
+- `/api/courses/instructor/:instructorId`
+  - `GET`: Get a list of courses by instructor Id.
 
 ### Sections
 - `/api/courses/:courseId/sections`
@@ -57,6 +59,7 @@ by categories, a search bar for direct queries, and pagination to manage the dis
 ### Lessons
 - `/api/sections/:sectionId/lessons`
   - `POST`: Create a lesson for a section.
+  - `GET`: Get a list of lessons for a section.
 - `/api/lessons/:lessonId`
   - `GET`: Get a lesson from Id
   - `PUT`: Update a lesson
