@@ -4,6 +4,7 @@ const useCourseStore = create((set) => ({
   courses: [],
   singleCourse: {},
   lessons: [],
+  singleLesson: {},
   setCourses: (courses) => set({ courses }),
   loadCourses: async (userId) => {
     try {
@@ -27,6 +28,18 @@ const useCourseStore = create((set) => ({
       console.log(error);
     }
   },
+  loadSingleLesson: async (lessonId) => {
+    try {
+      const response = await fetch(`/api/courses/lessons/${lessonId}`);
+      if (response.ok) {
+        const data = await response.json();
+        set({ singleLesson: data.data || {} });
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  },
+
   loadSections: async (courseId) => {
     try {
       const response = await fetch(`/api/courses/${courseId}`);
@@ -208,6 +221,7 @@ const useCourseStore = create((set) => ({
         },
       );
       if (!response.ok) throw new Error("Failed to delete section");
+
       set((state) => ({
         singleCourse: {
           ...state.singleCourse,

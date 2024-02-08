@@ -2,12 +2,7 @@
 import DeleteCourseConfirmationModal from "@/components/course/delete-confirmation-modal";
 import DeleteSectionConfirmationModal from "@/components/course/section/delete-section-modal";
 import { EditCourseForm } from "@/components/course/edit-course-form";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
+
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -25,7 +20,6 @@ import { useEffect, useState } from "react";
 import { NewSectionModal } from "@/components/course/section/new-section-modal";
 import { NewSectionDrawer } from "@/components/course/section/new-section-drawer";
 import { useMediaQuery } from "@/hooks/use-media-query";
-
 import { Label } from "@/components/ui/label";
 import Link from "next/link";
 
@@ -51,9 +45,6 @@ export default function CoursePage({
       console.error("Error deleting course:", error);
     }
   };
-
-  const sections = singleCourse?.sections ?? [];
-  console.log(sections);
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-start p-6">
@@ -81,7 +72,6 @@ export default function CoursePage({
             />
           ))}
         </CardContent>
-        {/* TODO: Add a proper form, modal and drawer for adding a new section. */}
         <CardFooter>
           <NewSection courseId={courseId} />
         </CardFooter>{" "}
@@ -105,6 +95,8 @@ const SectionItem = ({ section, courseId, sectionNumber }) => {
   const { updateSection } = useCourseStore();
   const [isDeleteSectionModalOpen, setIsDeleteSectionModalOpen] =
     useState(false);
+  const lessons = [section.lessons];
+  console.log({ lessons });
 
   const handleSave = async () => {
     try {
@@ -205,22 +197,21 @@ const SectionItem = ({ section, courseId, sectionNumber }) => {
               </div>
             </CardHeader>
             <CardContent>
-              <Accordion type="single" collapsible className="w-full p-4">
-                {section.lessons && section.lessons.length > 0 ? (
-                  section.lessons.map((lesson, index) => (
-                    <AccordionItem key={lesson._id} value={`${lesson._id}`}>
-                      <AccordionTrigger>
-                        {"Lesson " + (index + 1) + ": " + lesson.title}
-                      </AccordionTrigger>
-                      <AccordionContent className="flex items-center justify-between">
-                        {lesson.content}{" "}
-                      </AccordionContent>
-                    </AccordionItem>
-                  ))
-                ) : (
-                  <div>No lessons available.</div>
-                )}{" "}
-              </Accordion>
+              {section.lessons && section.lessons.length > 0 ? (
+                section.lessons.map((lesson, index) => (
+                  <Link
+                    key={index}
+                    href={`/instructor/dashboard/lesson/${lesson._id}`}
+                    className="flex items-center justify-between p-4 hover:underline"
+                  >
+                    <p className="px-4">
+                      {"Lesson " + (index + 1) + ": " + lesson.title}
+                    </p>
+                  </Link>
+                ))
+              ) : (
+                <div>No lessons available.</div>
+              )}{" "}
             </CardContent>
           </Card>
         </CardContent>

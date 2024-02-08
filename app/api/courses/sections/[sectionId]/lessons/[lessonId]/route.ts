@@ -1,4 +1,3 @@
-import Sections from "@/models/sections";
 import Lessons from "@/models/lessons";
 
 import { NextRequest, NextResponse } from "next/server";

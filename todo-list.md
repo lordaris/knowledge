@@ -15,6 +15,8 @@
 
 - [ ] Move the delete button of the course edition page to the course list page,
       next to the edit button.
+- [ ] Check all of the endpoints and urls, so they are consistent and
+      predictable.
 - [ ] Add a button to add a new section in the course edition page.
 - [ ] Add a button to delete a section in the course edition page.
 - [ ] Add a button to create a new lesson in the course edition page, it should
@@ -28,7 +30,7 @@
 - [ ] Add a page to show the user courses.
 - [ ] Add the new endpoint to the documentation
       `**/api/courses/sections/[sectionId]/lessons**`
-- [ ] Include zustand and zod in the documentation.
+- [x] Include zustand and zod in the documentation.
 - [ ] Remove the check list items in the documentation as this is the TODO list
       now.
 - [ ] Remove the accessibility features from the documentation by now.
@@ -87,4 +89,9 @@ Date 02/05/2024
 Date 02/06/2024
 
 - Add MDXeditor to the lesson edition page.
-- [ ] Make the app to apply the semantic formatting to the lessons.
+- [x] Make the app to apply the semantic formatting to the lessons.
+
+Date 02/07/2024
+
+- Add a button to edit the lesson in the course edition page, it should redirect
+  to a new page to edit the lesson.
