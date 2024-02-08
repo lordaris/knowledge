@@ -4,27 +4,52 @@
 
 - [Knowledge (By Aris)](#knowledge-by-aris)
   - [Purpose](#purpose)
-  - [Authentication](#authentication)
-  - [Development Tools](#development-tools)
-  - [Additional Libraries and Frameworks](#additional-libraries-and-frameworks)
+  - [Target Audience](#target-audience)
+  - [Technology stack](#technology-stack)
+    - [Frontend Technologies](#frontend-technologies)
+    - [Backend Technologies](#backend-technologies)
+    - [Authentication](#authentication)
+    - [Development Tools](#development-tools)
+    - [Additional Libraries and Frameworks](#additional-libraries-and-frameworks)
   - [Database Schema Overview](#database-schema-overview)
     - [Collections](#collections)
     - [Courses Collection](#courses-collection)
     - [Sections Collection](#sections-collection)
     - [Lessons Collection](#lessons-collection)
-  - [API Documentation Overview](#api-documentation-overview)
-    - [A note on API endpoints](#a-note-on-api-endpoints)
-    - [Base URL](#base-url)
-    - [User Authentication (Managed by Clerk)](#user-authentication-managed-by-clerk)
-    - [Courses](#courses)
-    - [Sections](#sections)
-    - [Lessons](#lessons)
-    - [Error Handling](#error-handling)
-    - [Notes on API Documentation](#notes-on-api-documentation)
-  - [How to run the project locally (Development Mode)](#how-to-run-the-project-locally-development-mode)
+  - [API Documentation Overview](#api-documentation-overview) -
+  [A note on API endpoints](#a-note-on-api-endpoints) - [Base URL](#base-url) -
+  [User Authentication (Managed by Clerk)](#user-authentication-managed-by-clerk) -
+  [Courses](#courses) - [Sections](#sections) - [Lessons](#lessons) -
+  [Error Handling](#error-handling) -
+  [Notes on API Documentation](#notes-on-api-documentation) -
+  [How to run the project locally (Development Mode)](#how-to-run-the-project-locally-development-mode)
   <!--toc:end-->
 
 ## Purpose
+
+Provide a comprehensive and engaging learning experience on text-based content.
+Designed for self-learners who prefer reading over video lectures, offering
+courses across various subjects like programming, history, science and more.
+
+## Target Audience
+
+- Self-learners who prefer text-based learning.
+- Students and professionals looking for supplementary educational resources.
+
+## Technology stack
+
+### Frontend Technologies
+
+- **Next.js**: Selected for its server-side rendering capabilities, which
+  enhance SEO and improve performance, especially beneficial for a content-rich
+  application like Knowledge by Aris
+- **React**: Used for building a dynamic and interactive user interface, taking
+  advantage of its component-based architecture.
+- **TypeScript**: Implemented for its strong typing features, which enhance code
+  quality and maintainability.
+- **shadcn/ui:** As a design system for building the user interface.
+
+### Backend Technologies
 
 - **Next.js API Routes**: Leveraged for building API endpoints within the
   Next.js framework. This simplifies development by using a unified framework
@@ -36,7 +61,7 @@
 - **Mongoose**: Utilized as a MongoDB object modeling tool, designed to work in
   an asynchronous environment and simplify interactions with the database.
 
-## Authentication
+### Authentication
 
 - **Clerk**: Integrated for robust user authentication and management. Clerk
   provides a seamless and secure way to handle user sign-ups, sign-ins, and
@@ -48,7 +73,7 @@
   - User Data Management: Utilizing Clerk for storing and managing user profiles
     and authentication states.
 
-## Development Tools
+### Development Tools
 
 - **Git**: For version control, facilitating collaborative development and code
   versioning.
@@ -61,7 +86,7 @@
 - **Zustand**: For state management.
 - **Zod**: For data validation.
 
-## Additional Libraries and Frameworks
+### Additional Libraries and Frameworks
 
 - **Fetch API**: Employed for making HTTP requests from the frontend to the
   backend. The Fetch API is native to modern browsers, eliminating the need for
@@ -104,12 +129,9 @@
 
 ## API Documentation Overview
 
-### A note on API endpoints
-
-I don't really like the RESTful approach for this project, because it doesn't
-make much sense to me to have an unnecessary path variable for some of the
-endpoints, as the ids are different for each collection. I'll stick with it for
-now as it's the standard and it may be useful in the future.
+> [!NOTE]
+> I don't really like the endpoint structure, so I'll make some changes
+> to it.
 
 ### Base URL
 
@@ -295,7 +317,7 @@ External: **`https://knowledgebyaris.com/`** Internal: **`/api/`**
 - **Consistency**: Maintain a consistent format and naming convention across all
   API endpoints for ease of use and understanding.
 
-## How to run the project locally (Development Mode)
+### How to run the project locally (Development Mode)
 
 1. Clone the repository `git clone git@github.com:lordaris/knowledge.git`
 2. Install the dependencies by running `npm install` in the root directory.
