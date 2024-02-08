@@ -30,7 +30,6 @@
 - [ ] Add a page to show the user courses.
 - [ ] Add the new endpoint to the documentation
       `**/api/courses/sections/[sectionId]/lessons**`
-- [x] Include zustand and zod in the documentation.
 - [ ] Remove the check list items in the documentation as this is the TODO list
       now.
 - [ ] Remove the accessibility features from the documentation by now.

@@ -1,0 +1,70 @@
+# Development ideas
+
+To enhance user experience and ease navigation within the application, the following changes are 
+proposed for the list of endpoints and the application's URL structure.
+
+## New URL list 
+
+### Public (General users)
+- **Main page** `/` 
+  - It should show a welcome hero, a button to go to explore courses, and a button to go to the about page. 
+- **Courses** `/courses`
+  - It should show a list of available courses. 
+- **Course detail**  `/courses/:id` 
+  - It should show the course details. 
+
+### Instructors
+- **Instructor dashboard** `/instructor`
+  - A central hub for instructors to view and manage their courses.
+- **Create a course** `/instructor/courses/new`
+  - A form to create a new course.
+- **Edit a course** `/instructor/courses/:id/edit`
+  - A form to edit an existing course.
+- **Manage courses** `/instructor/courses`
+  - A list of courses created by the instructor, with options to edit, delete, and view details.
+
+### Students
+- **Student dashboard** `/student`
+  - A central hub for students to view and manage their courses.
+- **Enroll in a course** `/courses/:id/enroll`
+  - A page to enroll in a course.
+
+
+## New Endpoints 
+### Courses
+- **Get one course by id, with its sections and lessons:** 
+  - `GET /api/courses/:courseId`
+- **Get all courses:** 
+  - `GET /api/courses`
+- **Get all available courses:** 
+  - `GET /api/courses?available=true`
+- **Create a course**: 
+  - `POST /api/courses`
+- **Update a course:**
+  - `PUT /api/courses/:courseId`
+- **Delete a course:**
+  - `DELETE /api/courses/:courseId`
+- **Create a section for a course:** 
+  - `POST /api/courses/:courseId/sections`
+- **Get a section with its lessons**
+  - `GET /api/sections/:sectionId`
+- **Update a section:** 
+  - `PUT /api/sections/:sectionId`
+- **Delete a section:** 
+  - `DELETE /api/sections/:sectionId`
+- **Create a lesson for a section:** 
+  - `POST /api/sections/:sectionId/lessons`
+- **Get a lesson from Id** 
+  - `GET /api/lessons/:lessonId`
+- **Update a lesson:** 
+  - `PUT /api/lessons/:lessonId`
+- **Delete a lesson:** 
+  - `DELETE /api/lessons/:lessonId`
+
+## Models 
+For data models, the following structure is proposed for the Course model:
+
+- Title: Should be clear and concise.
+- Description: Provides an overview of the course.
+- Availability: A boolean to indicate if the course is currently available.
+- Categories: An array of strings categorizing the course.

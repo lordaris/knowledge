@@ -2,7 +2,7 @@ import Courses from "@/models/courses";
 import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@clerk/nextjs";
 
-//
+// Create a course
 export async function POST(request: NextRequest) {
   const { userId } = auth();
 
@@ -40,6 +40,7 @@ export async function POST(request: NextRequest) {
   }
 }
 
+// Get a course
 export async function GET() {
   try {
     const courses = await Courses.find();
