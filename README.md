@@ -4,59 +4,27 @@
 
 - [Knowledge (By Aris)](#knowledge-by-aris)
   - [Purpose](#purpose)
-  - [Target Audience](#target-audience)
-  - [Key Features](#key-features)
-  - [Technology Stack](#technology-stack)
-    - [Frontend Technologies](#frontend-technologies)
-    - [Backend Technologies](#backend-technologies)
-    - [Authentication](#authentication)
-    - [Development Tools](#development-tools)
-    - [Additional Libraries and Frameworks](#additional-libraries-and-frameworks)
+  - [Authentication](#authentication)
+  - [Development Tools](#development-tools)
+  - [Additional Libraries and Frameworks](#additional-libraries-and-frameworks)
   - [Database Schema Overview](#database-schema-overview)
     - [Collections](#collections)
-    - [Users Collection](#users-collection)
     - [Courses Collection](#courses-collection)
     - [Sections Collection](#sections-collection)
     - [Lessons Collection](#lessons-collection)
-  - [API Documentation Overview](#api-documentation-overview) -
-  [A note on API endpoints](#a-note-on-api-endpoints) - [Base URL](#base-url) -
-  [User Authentication (Managed by Clerk)](#user-authentication-managed-by-clerk) -
-  [Courses](#courses) - [Sections](#sections) - [Lessons](#lessons) -
-  [Error Handling](#error-handling) -
-  [Notes on API Documentation](#notes-on-api-documentation) -
-  [How to run the project locally (Development Mode)](#how-to-run-the-project-locally-development-mode)
+  - [API Documentation Overview](#api-documentation-overview)
+    - [A note on API endpoints](#a-note-on-api-endpoints)
+    - [Base URL](#base-url)
+    - [User Authentication (Managed by Clerk)](#user-authentication-managed-by-clerk)
+    - [Courses](#courses)
+    - [Sections](#sections)
+    - [Lessons](#lessons)
+    - [Error Handling](#error-handling)
+    - [Notes on API Documentation](#notes-on-api-documentation)
+  - [How to run the project locally (Development Mode)](#how-to-run-the-project-locally-development-mode)
   <!--toc:end-->
 
 ## Purpose
-
-Provide a comprehensive and engaging learning experience on text-based content.
-Designed for self-learners who prefer reading over video lectures, offering
-courses across various subjects like programming, history, science and more.
-
-## Target Audience
-
-- Self-learners who prefer text-based learning.
-- Students and professionals looking for supplementary educational resources.
-
-## Key Features
-
-1. **Course catalog**. Categorized by subjects
-2. **User Authentication**: Secure sign-up and sign-in using Clerk.
-
-## Technology Stack
-
-### Frontend Technologies
-
-- **Next.js**: Selected for its server-side rendering capabilities, which
-  enhance SEO and improve performance, especially beneficial for a content-rich
-  application like Knowledge by Aris
-- **React**: Used for building a dynamic and interactive user interface, taking
-  advantage of its component-based architecture.
-- **TypeScript**: Implemented for its strong typing features, which enhance code
-  quality and maintainability.
-- **shadcn/ui:** As a design system for building the user interface.
-
-### Backend Technologies
 
 - **Next.js API Routes**: Leveraged for building API endpoints within the
   Next.js framework. This simplifies development by using a unified framework
@@ -68,7 +36,7 @@ courses across various subjects like programming, history, science and more.
 - **Mongoose**: Utilized as a MongoDB object modeling tool, designed to work in
   an asynchronous environment and simplify interactions with the database.
 
-### Authentication
+## Authentication
 
 - **Clerk**: Integrated for robust user authentication and management. Clerk
   provides a seamless and secure way to handle user sign-ups, sign-ins, and
@@ -80,7 +48,7 @@ courses across various subjects like programming, history, science and more.
   - User Data Management: Utilizing Clerk for storing and managing user profiles
     and authentication states.
 
-### Development Tools
+## Development Tools
 
 - **Git**: For version control, facilitating collaborative development and code
   versioning.
@@ -93,7 +61,7 @@ courses across various subjects like programming, history, science and more.
 - **Zustand**: For state management.
 - **Zod**: For data validation.
 
-### Additional Libraries and Frameworks
+## Additional Libraries and Frameworks
 
 - **Fetch API**: Employed for making HTTP requests from the frontend to the
   backend. The Fetch API is native to modern browsers, eliminating the need for
@@ -133,18 +101,6 @@ courses across various subjects like programming, history, science and more.
 - **title**: Title of the lesson.
 - **content**: The main textual content of the lesson.
 - **sectionId**: **`ObjectId`** reference to the corresponding **`Section`**
-
-## Site navigation
-
-- **/** Home page
-- **/courses** Courses page (for the public)
-- **/courses/{courseId}** Course page
-- **/instructor/dashboard** Instructor dashboard. It allows the instructor to
-  see its courses and create new ones.
-- **/instructor/dashboard/courses/{courseId}** Course edition page. It allows
-  the instructor to edit the course title and description, add new sections,
-  delete the course and add lessons to the sections.
-- **/instructor/dashboard/lesson/{lessonId}** Lesson edition page
 
 ## API Documentation Overview
 
@@ -339,7 +295,7 @@ External: **`https://knowledgebyaris.com/`** Internal: **`/api/`**
 - **Consistency**: Maintain a consistent format and naming convention across all
   API endpoints for ease of use and understanding.
 
-### How to run the project locally (Development Mode)
+## How to run the project locally (Development Mode)
 
 1. Clone the repository `git clone git@github.com:lordaris/knowledge.git`
 2. Install the dependencies by running `npm install` in the root directory.
