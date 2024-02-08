@@ -1,6 +1,7 @@
 # Knowledge (By Aris)
 
 <!--toc:start-->
+
 - [Knowledge (By Aris)](#knowledge-by-aris)
   - [Purpose](#purpose)
   - [Target Audience](#target-audience)
@@ -24,7 +25,7 @@
     - [Error Handling](#error-handling)
     - [Notes on API Documentation](#notes-on-api-documentation)
   - [How to run the project locally (Development Mode)](#how-to-run-the-project-locally-development-mode)
-<!--toc:end-->
+  <!--toc:end-->
 
 ## Purpose
 
@@ -131,8 +132,8 @@ courses across various subjects like programming, history, science and more.
 ## API Documentation Overview
 
 > [!NOTE]
-> I don't really like the endpoint structure, so I'll make some changes
-> to it.
+> I made changes to the API endpoints, so maybe there are errors. If so,
+> it's necessary to check for the correct endpoints.
 
 ### Base URL
 
@@ -141,168 +142,38 @@ External: **`https://knowledgebyaris.com/`** Internal: **`/api/`**
 ### User Authentication (Managed by Clerk)
 
 - **Sign Up**
-
-- Endpoint: **`/sign-up`**
-- Method: **`POST`**
-- Description: Registers a new user.
-- Request Body: **`{ email, password }`**
-- Response: **`201 Created`** with user details or **`400 Bad Request`** on
-  failure.
-
 - **Sign In**
-- Endpoint: **`/sign-in`**
-- Method: **`POST`**
-- Description: Authenticates a user.
-- Request Body: **`{ email, password }`**
-- Response: **`200 OK`** with session details or **`401 Unauthorized`** on
-  failure.
 
 ### Courses
 
-- List All Courses
-
-  - Endpoint: **`/courses`**
-  - Method: **`GET`**
-  - Description: Retrieves a list of all available courses.
-  - Response: **`200 OK`** with an array of courses.
-
-- List courses by instructor
-
-- Endpoint **`/courses/instructor/{instructorId}`**
-- Method: **`GET`**
-- Description: Retrieves a list of courses by instructor.
-- Path Parameter: **`instructorId`**
-- Response: **`200 OK`** with an array of courses, or **`404 Not Found`** if not
-  existing.
-
-- List Courses a User is Enrolled In
-
-  - Endpoint: **`/users/{userId}/enrolled-courses`**
-  - Method: **`GET`**
-  - Description: Retrieves a list of courses a user is enrolled in.
-  - Path Parameter: **`userId`**
-  - Response: **`200 OK`** with an array of enrolled courses, or
-    **`404 Not Found`** if the user is not enrolled in any courses.
-
-- Get Course Details
-
-  - Endpoint: **`/courses/{courseId}`**
-  - Method: **`GET`**
-  - Description: Retrieves detailed information about a specific course.
-  - Path Parameter: **`courseId`**
-  - Response: **`200 OK`** with course details or **`404 Not Found`** if not
-    existing.
-
-- Create a new course
-
-  - Endpoint: **`/courses`**
-  - Method: **`POST`**
-  - Description: Creates a new course. It validates that the user is logged in.
-    If not, it will throw an error.
-  - [ ] Validate if the user is an instructor.
-  - Request Body: **`{ title, description }`**
-  - Response: **`201 Created`** with course details or **`400 Bad Request`** on
-    failure.
-
-- Update a course
-
-- Endpoint: **`/courses/{courseId}`**
-- Method: **`PUT`**
-- Description: Updates an existing course.
-- Path Parameter: **`courseId`**
-- Request Body: **`{ title, description }`**
-- Response: **`200 OK`** with course details or **`400 Bad Request`** on
-  failure.
-
-- Delete a course
-
-- Endpoint: **`/courses/{courseId}`**
-- Method: **`DELETE`**
-- Description: Deletes an existing course.
-- Path Parameter: **`courseId`**
-- Response: **`200 OK`** or **`400 Bad Request`** on failure.
+- `/api/courses/:courseId`
+  - `GET`: Get a course by course Id
+  - `PUT`: Update a course by course Id
+  - `DELETE`: Delete a course.
+- `/api/courses`
+  - `GET`: Get a list of courses.
+  - `POST`: Create a new course.
+- `/api/courses/instructor/:instructorId`
+  - `GET`: Get a list of courses by instructor Id.
 
 ### Sections
 
-- Add a section to a course
-
-- Endpoint: **`/courses/{courseId}/sections`**
-- Method: **`POST`**
-- Description: Adds a new section to a specific course.
-- Path Parameter: **`courseId`**
-- Request Body: **`{ title, description }`**
-- Response: **`201 Created`** with course details or **`400 Bad Request`** on
-  failure.
-
-- Get a section from a course by id
-
-- Endpoint: **`/courses/{courseId}/sections/{sectionId}`**
-- Method: **`GET`**
-- Description: Retrieves detailed information about a specific section.
-- Path Parameter: **`sectionId`**
-- Response: **`200 OK`** with section details or **`404 Not Found`** if not
-  existing.
-
-- Update a section
-
-- Endpoint: **`/courses/{courseId}/sections/{sectionId}`**
-- Method: **`PUT`**
-- Description: Updates an existing section.
-- Path Parameter: **`sectionId`**
-- Request Body: **`{ title, description }`**
-- Response: **`200 OK`** with section details or **`400 Bad Request`** on
-  failure.
-
-- Delete a section
-- Endpoint: **`/courses/{courseId}/sections/{sectionId}`**
-- Method: **`DELETE`**
-- Description: Deletes an existing section.
-- Path Parameter: **`sectionId`**
-- Response: **`200 OK`** or **`400 Bad Request`** on failure.
+- `/api/courses/:courseId/sections`
+  - `POST`: Create a section for a course.
+- `/api/sections/:sectionId`
+  - `GET`: Get a section with its lessons
+  - `PUT`: Update a section
+  - `DELETE`: Delete a section
 
 ### Lessons
 
-- Add a lesson to a section
-
-- Endpoint: **`/courses/sections/{sectionId}/lessons`**
-- Method: **`POST`**
-- Description: Adds a new lesson to a specific section.
-- Path Parameter: **`sectionId`**
-- Request Body: **`{ title, content }`**
-- Response: **`201 Created`** with section details or **`400 Bad Request`** on
-  failure.
-
-- Get a lesson from a section by id
-
-- Endpoint: **`/courses/sections/{sectionId}/lessons/{lessonId}`**
-- Method: **`GET`**
-- Description: Retrieves detailed information about a specific lesson.
-- Path Parameter: **`lessonId`**
-- Response: **`200 OK`** with lesson details or **`404 Not Found`** if not
-  existing.
-
-- Update a lesson
-
-- Endpoint: **`/courses/sections/{sectionId}/lessons/{lessonId}`**
-- Method: **`PUT`**
-- Description: Updates an existing lesson.
-- Path Parameter: **`lessonId`**
-- Request Body: **`{ title, content }`**
-- Response: **`200 OK`** with lesson details or **`400 Bad Request`** on
-  failure.
-
-- Delete a lesson
-
-- Endpoint: **`/courses/sections/{sectionId}/lessons/{lessonId}`**
-- Method: **`DELETE`**
-- Description: Deletes an existing lesson.
-- Path Parameter: **`lessonId`**
-- Response: **`200 OK`** or **`400 Bad Request`** on failure.
-
-- Get a lesson by id
-
-- Endpoint: **`/lessons/{lessonId}`**
-- Method: **`GET`**
+- `/api/sections/:sectionId/lessons`
+  - `POST`: Create a lesson for a section.
+  - `GET`: Get a list of lessons for a section.
+- `/api/lessons/:lessonId`
+  - `GET`: Get a lesson from Id
+  - `PUT`: Update a lesson
+  - `DELETE`: Delete a lesson
 
 ### Error Handling
 
