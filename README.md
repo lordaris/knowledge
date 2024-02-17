@@ -107,6 +107,8 @@ courses across various subjects like programming, history, science and more.
 - **\_id**: Unique identifier for each course.
 - **title**: Name of the course.
 - **description**: A brief overview of the course.
+- **category**: The subject category of the course (e.g., programming, history,
+  science).
 - **sections**: An array of **`ObjectId`** references to the **`Section`**
   model, representing the sections within the course. course is currently active
   and available.
@@ -130,10 +132,6 @@ courses across various subjects like programming, history, science and more.
 - **sectionId**: **`ObjectId`** reference to the corresponding **`Section`**
 
 ## API Documentation Overview
-
-> [!NOTE]
-> I made changes to the API endpoints, so maybe there are errors. If so,
-> it's necessary to check for the correct endpoints.
 
 ### Base URL
 
