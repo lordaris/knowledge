@@ -45,6 +45,8 @@ courses across various subjects like programming, history, science and more.
 ![Image](https://github.com/lordaris/knowledge/blob/main/public/create-new-course.png)
 ![Image](https://github.com/lordaris/knowledge/blob/main/public/instructor%20dashboard.png)
 ![Image](https://github.com/lordaris/knowledge/blob/main/public/new-lesson.png)
+![Image](https://github.com/lordaris/knowledge/blob/main/public/edit%20course%201.png)
+![Image](https://github.com/lordaris/knowledge/blob/main/public/edit%20course%202.png)
 
 ## Technology stack
 
