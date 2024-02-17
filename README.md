@@ -40,7 +40,7 @@ courses across various subjects like programming, history, science and more.
 
 ## Some images of the project
 
-![Image]("/public/courses.png")
+![Image](https://github.com/lordaris/knowledge/blob/main/public/courses.png)
 
 ## Technology stack
 
