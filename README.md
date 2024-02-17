@@ -38,6 +38,10 @@ courses across various subjects like programming, history, science and more.
 - Self-learners who prefer text-based learning.
 - Students and professionals looking for supplementary educational resources.
 
+## Some images of the project
+
+![Image]("/public/courses.png")
+
 ## Technology stack
 
 ### Frontend Technologies
