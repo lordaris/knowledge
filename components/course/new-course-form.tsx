@@ -15,12 +15,21 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import useCourseStore from "@/store/course-store";
+import { categories } from "@/utils/constants/categories";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 const formSchema = z.object({
   title: z.string().min(3, "Title should be at least 3 characters"),
   description: z
     .string()
     .min(10, "Description should be at least 10 characters"),
+  category: z.enum(categories),
 });
 
 export const NewCourseForm = ({ onClose }) => {
@@ -39,7 +48,7 @@ export const NewCourseForm = ({ onClose }) => {
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       // Call the addCourse method from useCourseStore
-      await useCourseStore.getState().addCourse(values);
+      await addCourse(values);
 
       setIsCourseCreated(true);
       setSubmissionMessage(
@@ -86,6 +95,29 @@ export const NewCourseForm = ({ onClose }) => {
             </FormItem>
           )}
         />
+
+        <FormField
+          control={form.control}
+          name="category"
+          render={({ field }) => (
+            <FormItem className="pb-4">
+              <FormLabel>Category</FormLabel>
+              <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <SelectTrigger as="button" className="w-full">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  {categories.map((category) => (
+                    <SelectItem key={category} value={category}>
+                      {category}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+              <FormMessage />
+            </FormItem>
+          )}
+        ></FormField>
         <Button type="submit">Create Course</Button>
 
         {isCourseCreated && <p>{submissionMessage}</p>}

@@ -2,6 +2,7 @@ import { create } from "zustand";
 
 const useCourseStore = create((set) => ({
   courses: [],
+  allCourses: [],
   singleCourse: {},
   lessons: [],
   singleLesson: {},
@@ -12,6 +13,17 @@ const useCourseStore = create((set) => ({
       if (response.ok) {
         const data = await response.json();
         set({ courses: data.data });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  },
+  loadAllCourses: async () => {
+    try {
+      const response = await fetch(`/api/courses`);
+      if (response.ok) {
+        const data = await response.json();
+        set({ allCourses: data.data });
       }
     } catch (error) {
       console.log(error);

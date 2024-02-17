@@ -4,6 +4,13 @@ import createMDX from "@next/mdx";
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  images: {
+    remotePatterns: [
+      { hostname: "placehold.co" },
+      { hostname: "images.unsplash.com" },
+      { hostname: "picsum.photos" },
+    ],
+  },
   reactStrictMode: true,
   pageExtensions: ["js", "jsx", "ts", "tsx", "md", "mdx"],
 };

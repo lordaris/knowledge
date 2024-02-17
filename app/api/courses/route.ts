@@ -20,8 +20,13 @@ export async function POST(request: NextRequest) {
       );
     }
     const req = await request.json();
-    const { title, description } = req;
-    const newCourse = new Courses({ title, description, createdBy: userId });
+    const { title, description, category } = req;
+    const newCourse = new Courses({
+      title,
+      description,
+      createdBy: userId,
+      category,
+    });
     const savedCourse = await newCourse.save();
 
     return NextResponse.json({
@@ -40,7 +45,7 @@ export async function POST(request: NextRequest) {
   }
 }
 
-// Get a course
+// Get courses
 export async function GET() {
   try {
     const courses = await Courses.find();
