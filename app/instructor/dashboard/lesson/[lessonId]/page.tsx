@@ -18,7 +18,7 @@ export default function LessonEditPage({
   }, [lessonId, loadSingleLesson]);
 
   return (
-    <div className="flex min-h-screen flex-col items-center  justify-start">
+    <div className="prose items-center justify-start p-4">
       <h1 className="">{singleLesson.title}</h1>
       <Markdown>{singleLesson.content}</Markdown>
     </div>

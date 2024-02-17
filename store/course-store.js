@@ -196,14 +196,11 @@ const useCourseStore = create((set) => ({
 
   updateSection: async (courseId, sectionId, updatedSection) => {
     try {
-      const response = await fetch(
-        `/api/courses/${courseId}/sections/${sectionId}`,
-        {
-          method: "PUT",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(updatedSection),
-        },
-      );
+      const response = await fetch(`/api/courses/sections/${sectionId}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(updatedSection),
+      });
       if (response.ok) {
         const data = await response.json();
         set((state) => ({
@@ -226,12 +223,9 @@ const useCourseStore = create((set) => ({
 
   deleteSection: async (courseId, sectionId) => {
     try {
-      const response = await fetch(
-        `/api/courses/${courseId}/sections/${sectionId}`,
-        {
-          method: "DELETE",
-        },
-      );
+      const response = await fetch(`/api/courses/sections/${sectionId}`, {
+        method: "DELETE",
+      });
       if (!response.ok) throw new Error("Failed to delete section");
 
       set((state) => ({
