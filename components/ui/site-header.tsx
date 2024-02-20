@@ -1,6 +1,7 @@
 import { ModeToggle } from "./toggle";
 import { AppName } from "./app-name";
-import { UserButton } from "@clerk/nextjs";
+import { UserButton, SignedIn, SignedOut } from "@clerk/nextjs";
+import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
 export const SiteHeader = () => {
@@ -12,10 +13,21 @@ export const SiteHeader = () => {
             <AppName />
           </Link>
         </div>
-        <div className=" text-center">
+        <div>
           <ModeToggle />
         </div>
-        <div className="flex">
+        <div className="flex items-center  space-x-4">
+          <SignedIn>
+            <Button asChild>
+              <Link href="/dashboard">Dashboard </Link>
+            </Button>
+          </SignedIn>
+          <SignedOut>
+            <Button asChild className="">
+              <Link href="/dashboard">Login </Link>
+            </Button>
+          </SignedOut>
+
           <UserButton afterSignOutUrl="/" />
         </div>
       </div>
