@@ -183,20 +183,6 @@ External: **`https://knowledgebyaris.com/`** Internal: **`/api/`**
   - `PUT`: Update a lesson
   - `DELETE`: Delete a lesson
 
-### Error Handling
-
-- Each endpoint should provide meaningful error messages and status codes for
-  various failure scenarios, such as **`400 Bad Request`** for validation
-  errors, **`401 Unauthorized`** for authentication failures, and
-  **`500 Internal Server Error`** for unexpected issues.
-
-### Notes on API Documentation
-
-- **Security**: Ensure that all endpoints are secured as needed, particularly
-  those that access or modify user data.
-- **Consistency**: Maintain a consistent format and naming convention across all
-  API endpoints for ease of use and understanding.
-
 ## How to run the project locally (Development Mode)
 
 1. Clone the repository `git clone git@github.com:lordaris/knowledge.git`

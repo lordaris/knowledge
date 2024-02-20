@@ -1,13 +1,5 @@
 # Development ideas
 
-To enhance user experience and ease navigation within the application, the following changes are 
-proposed for the list of endpoints and the application's URL structure.
-
-The new URL structure and design will be tested using a temporary folder in the app folder. 
-The name of the folder is `new-structure`. 
-Inside that folder, there will be a new `components` folder with the new 
-components for the new structure. 
-If the new structure is approved, it will be moved to the main app folder.
 
 
 ## New URL list 
@@ -39,38 +31,6 @@ by categories, a search bar for direct queries, and pagination to manage the dis
   - A central hub for students to view and manage their courses.
 - **Enroll in a course** `/courses/:id/enroll`
   - A page to enroll in a course.
-
-
-## New Endpoints 
-### Courses
-
-
-- `/api/courses/:courseId`
-  - `GET`: Get a course by course Id
-  - `PUT`: Update a course by course Id
-  - `DELETE`: Delete a course.
-- `/api/courses`
-  - `GET`: Get a list of courses.
-  - `POST`: Create a new course.
-- `/api/courses/instructor/:instructorId`
-  - `GET`: Get a list of courses by instructor Id.
-
-### Sections
-- `/api/courses/:courseId/sections`
-  - `POST`: Create a section for a course.
-- `/api/sections/:sectionId`
-  - `GET`: Get a section with its lessons
-  - `PUT`: Update a section
-  - `DELETE`: Delete a section
-
-### Lessons
-- `/api/sections/:sectionId/lessons`
-  - `POST`: Create a lesson for a section.
-  - `GET`: Get a list of lessons for a section.
-- `/api/lessons/:lessonId`
-  - `GET`: Get a lesson from Id
-  - `PUT`: Update a lesson
-  - `DELETE`: Delete a lesson
 
 
 ## Models 
