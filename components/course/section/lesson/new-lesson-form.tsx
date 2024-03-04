@@ -74,7 +74,7 @@ export const NewLessonForm = ({ sectionId, courseId }) => {
       setSubmissionMessage("Lesson created successfully!");
       await loadLessons(sectionId);
       setTimeout(() => {
-        router.push(`/instructor/dashboard/${courseId}`);
+        router.push(`/instructor/courses/${courseId}`);
       }, 1000);
     } catch (error) {
       console.error(error);

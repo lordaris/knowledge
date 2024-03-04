@@ -19,7 +19,7 @@ export const SiteHeader = () => {
         <div className="flex items-center  space-x-4">
           <SignedIn>
             <Button asChild>
-              <Link href="/dashboard">Dashboard </Link>
+              <Link href="/instructor">Dashboard </Link>
             </Button>
           </SignedIn>
           <SignedOut>

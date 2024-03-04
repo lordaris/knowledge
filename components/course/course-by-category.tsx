@@ -1,5 +1,6 @@
 import { Separator } from "@/components/ui/separator";
 import { CourseCard } from "@/components/course/course-card";
+import Link from "next/link";
 
 export function CourseByCategory({ courses }) {
   const coursesByCategory = courses.reduce((acc, course) => {
@@ -20,7 +21,11 @@ export function CourseByCategory({ courses }) {
           <Separator />
           <div className="grid grid-cols-1 gap-4 p-4 md:grid-cols-2 lg:grid-cols-3">
             {courses.map((course) => {
-              return <CourseCard course={course} key={course._id} />;
+              return (
+                <Link href={`/courses/${course._id}`} key={course._id}>
+                  <CourseCard course={course} />
+                </Link>
+              );
             })}
           </div>
         </div>

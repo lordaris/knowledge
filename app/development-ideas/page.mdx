@@ -1,6 +1,6 @@
 # Development ideas
 
-
+- Remove zustand as the data fetching library is good enough for the project. 
 
 ## New URL list 
 
@@ -17,10 +17,16 @@ by categories, a search bar for direct queries, and pagination to manage the dis
   including its syllabus, instructor details, user reviews, and enrollment options.
 
 ### Instructors
+- **Instructor sign-up** `/instructor/signup`
+  - A form to create a new instructor account. 
+    -It should create a new user if it doesn't exist, and assign the role of instructor. 
+    - If the user already exists and is not an instructor, it should include the role of instructor.
+    - If the user is logged in and it have the instructor role, it should redirect to
+    the instructor dashboard.
+    - If the user is logged in and it doesn't have the instructor role, it should ask if the user
+    wants to be an instructor and add the role if the user accepts.
 - **Instructor dashboard** `/instructor`
   - A central hub for instructors to view and manage their courses.
-- **Create a course** `/instructor/courses/new`
-  - A form to create a new course.
 - **Edit a course** `/instructor/courses/:id/edit`
   - A form to edit an existing course.
 - **Manage courses** `/instructor/courses`

@@ -7,7 +7,7 @@ const useCourseStore = create((set) => ({
   lessons: [],
   singleLesson: {},
   setCourses: (courses) => set({ courses }),
-  loadCourses: async (userId) => {
+  loadCoursesByInstructor: async (userId) => {
     try {
       const response = await fetch(`/api/courses/instructor/${userId}`);
       if (response.ok) {
